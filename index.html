@@ -2,86 +2,61 @@
 <html>
     <link href='https://fonts.googleapis.com/css?family=Raleway:100,200,300,400,500,600,700,800,900' rel='stylesheet' type='text/css'>
     <link rel="icon" href="favicon.ico" type="image/gif" sizes="16x16">
+    <link rel="stylesheet" type="text/css" href="main.css">
+    <title>RSGC SSAS</title>
     <style>
-        body{
+        h1{
+            font-size: 6em;
             margin:0;
-            font-family: 'Raleway', sans-serif;
         }
-        #container{
-            position:fixed;
-            height:100%;
-            width:100%;
-        }
-        #leftSide, #rightSide{
-            width:50%;
-            height: 100%;
-        }
-        #leftSide{
-            float:left;
-            text-align: center;
-            display:flex;
-            align-items: center;
-        }
-        #rightSide{
-            float:right;
-            display:flex;
-            align-items: center;
-        }
-        form{
+        #mainSection{
             align:center;
             margin:auto;
             width:80%;
-            text-align: left;
-            
-        }
-        input{
-            float:right;
-            font-size: 1.5em;
-        }
-        label{
-            font-size: 1.5em;
-        }
-        button{
-            font-size: 1.5em;
             text-align: center;
-            float:right;
+            color:rgb(21,119,204);
+            font-weight: 700;
         }
-        .btn {
-            -webkit-border-radius: 8;
-            -moz-border-radius: 8;
-            border-radius: 8px;
-            color: #ffffff;
-            background: #0172cf;
-            padding: 9px 20px 10px 20px;
+        a{
+            padding-left: 10px;
+            padding-right: 10px;
+            font-size: 1.2em;
             text-decoration: none;
+            text-transform: uppercase;
         }
-
-        .btn:hover {
-            background: #3cb0fd;
-            background-image: -webkit-linear-gradient(top, #3cb0fd, #3498db);
-            background-image: -moz-linear-gradient(top, #3cb0fd, #3498db);
-            background-image: -ms-linear-gradient(top, #3cb0fd, #3498db);
-            background-image: -o-linear-gradient(top, #3cb0fd, #3498db);
-            background-image: linear-gradient(to bottom, #3cb0fd, #3498db);
-            text-decoration: none;
+        a:visited{
+            color:rgb(21,119,204);
         }
-        img{
-            width:100%;
-            height;100%;
+        a:hover{
+            color:#7EB3E0;
+            text-decoration: underline;
+        }
+        #imageLink{
+            padding:0;
         }
     </style>
     
     <body>
         <div id="container">
+            <div id="top">
+                <a href="index.html" id="imageLink"><img src="sample.png" id="logo"></a>
+            </div>
             <div id="leftSide">
-                <form>
-                    <label class="inputDesc">Email:</label> <input type="text"> <br> <br>
-                    <label class="inputDesc">Password:</label> <input type="text"> <br> <br> <br>
-                    <button class="btn"> Login</button>
-                </form>
+                <div id="mainSection">
+                <h1>
+                SSAS<br> 
+                </h1>
+                <br> 
+                <br> 
+                <br> 
+                <br> 
+                <a href="studentlogin.html">Student Login</a>
+                <a href="teacherlogin.html">Teacher Login</a>
+                <a href="register.html">Create Account</a>
+                </div>
             </div>
             <div id="rightSide">
-                <img src="caduceus.png">
+                <img src="caduceus.png" id="caudecus">
             </div>
         </div>
     </body>

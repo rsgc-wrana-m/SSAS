@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+    <link href='https://fonts.googleapis.com/css?family=Raleway:100,200,300,400,500,600,700,800,900' rel='stylesheet' type='text/css'>
+    <link rel="icon" href="favicon.ico" type="image/gif" sizes="16x16">
+    <link rel="stylesheet" type="text/css" href="main.css">
+    <title>Student Login</title>
+    <style>
+        form{
+            align:center;
+            margin:auto;
+            width:50%;
+            text-align: left;
+        }
+        input{
+            float:right;
+            font-size: 1.5em;
+        }
+        label{
+            font-size: 1.5em;
+        }
+        button{
+            margin:auto;
+        }
+        emailInput{
+        }
+    </style>
+    
+    <script>
+            function emailPassword() {
+                document.getElementById("emailInput").style.display = "none";
+
+            }
+    </script>
+    
+    <body>
+        <div id="container">
+            <div id="top">
+                <a href="index.html"><img src="sample.png" id="logo"></a>
+            </div>
+            <br><br><br>
+                <form id="emailInput">
+                    <label class="inputDesc">Email associated with your account:</label> <input type="text"> <br> <br> <br>
+                    <button class="btn" onclick="emailPassword()">Recover Account</button> 
+                </form>
+        </div>
+    </body>
+</html>
