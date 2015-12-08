@@ -3,7 +3,7 @@
     <link href='https://fonts.googleapis.com/css?family=Raleway:100,200,300,400,500,600,700,800,900' rel='stylesheet' type='text/css'>
     <link rel="icon" href="favicon.ico" type="image/gif" sizes="16x16">
     <link rel="stylesheet" type="text/css" href="main.css">
-    <title>Student Login</title>
+    <title>Forgot Password</title>
     <style>
         form{
             align:center;
@@ -21,14 +21,24 @@
         button{
             margin:auto;
         }
-        emailInput{
+        #emailInput{
+        }
+        #buttonSection{
+            width:50%;
+            margin:auto;
+        }
+        #submitted{
+            margin:auto;
+            display:none;
+            text-align: center;
         }
     </style>
     
     <script>
             function emailPassword() {
                 document.getElementById("emailInput").style.display = "none";
-
+                document.getElementById("buttonSection").style.display = "none";
+                document.getElementById("submitted").style.display = "block";
             }
     </script>
     
@@ -40,8 +50,13 @@
             <br><br><br>
                 <form id="emailInput">
                     <label class="inputDesc">Email associated with your account:</label> <input type="text"> <br> <br> <br>
-                    <button class="btn" onclick="emailPassword()">Recover Account</button> 
                 </form>
+                <div id="buttonSection">
+                    <button class="btn" onclick="emailPassword()">Recover Account</button> 
+                </div>
+                <div id="submitted">
+                    <h1>Recovery Email has been sent (If the account exsists)</h1>
+                </div>
         </div>
     </body>
 </html>
