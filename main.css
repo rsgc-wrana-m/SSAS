@@ -42,15 +42,15 @@
             -webkit-border-radius: 8;
             -moz-border-radius: 8;
             border-radius: 8px;
-            color: #ffffff;
-            color:rgb(21,119,204);
+            color: #ffffff !important;
+            background:rgb(21,119,204) ;
             padding: 9px 20px 10px 20px;
             text-decoration: none;
             border-style: hidden;
         }
 
         .btn:hover {
-            background: #3cb0fd;
+            background: #3cb0fd !imprtant;
             background-image: -webkit-linear-gradient(top, #3cb0fd, #3498db);
             background-image: -moz-linear-gradient(top, #3cb0fd, #3498db);
             background-image: -ms-linear-gradient(top, #3cb0fd, #3498db);
