@@ -42,7 +42,10 @@
         
           
           if ($stored_password == $provided_password) {
-              header('Location: Student_landing.html'); 
+              session_start();
+              $_SESSION['name']=$provided_email;
+              header('Location: landed.php'); 
+
           } else {
               echo "<p>" . $provided_email . " entered an incorrect password</p>";
           }
