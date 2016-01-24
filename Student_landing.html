@@ -6,29 +6,33 @@
     <title>RSGC SSAS</title>
     
     <style>
-         #leftSide,{
-            width:50%;
-            height: 50%;
-            
-        }
         
         h1{
-           
+            text-align: left;
             font-size: 6em;
             margin:0;
-             color:rgb(21,119,204);
         }
-          h4{
+        h2{
+            font-weight: 400;
+            text-align: center;
             font-size: 2em;
             margin:0;
-               text-align: center;
-             
         }
-        
-        
+        h3{
+                      font-weight: 400;
+
+            text-align: center;
+            font-size: 2em;
+            vertical-align: middle;
+margin-left: 20px;
+        float:left;
+            
+            
+        }
         #mainSection{
             align:center;
             margin:auto;
+            
             width:80%;
             text-align: center;
             color:rgb(21,119,204);
@@ -53,91 +57,130 @@
             padding:0;
         }
         
-.image-cropper img{
-   
-    width:100px;
--moz-border-radius: 50%;
-    -webkit-border-radius: 50%;
-    border-radius: 50%;
-    
-}
+        #name{
+            padding-top: 10%;
+           img-align:middle;
+            width: 20%;
+           text-align: center;
+         
         
-        img{
-          width: 70px;  
         }
         
         
-        table{
-             margin-left:5%;
-             align-content: center;
-            text-align: center;
-        }     
+        
+        .butn {
+  font-family: 'Raleway', sans-serif;
+   background: #ffffff;
+  background-image: -webkit-linear-gradient(top, #ffffff, #ffffff);
+  background-image: -moz-linear-gradient(top, #ffffff, #ffffff);
+  background-image: -ms-linear-gradient(top, #ffffff, #ffffff);
+  background-image: -o-linear-gradient(top, #ffffff, #ffffff);
+  background-image: linear-gradient(to bottom, #ffffff, #ffffff);
+  -webkit-border-radius: 0;
+  -moz-border-radius: 0;
+  border-radius: 0px;
+  
+  font-size: 33px;
+  width:200px;
+            height:50px;
+  text-decoration: none;
+}
+
+  
+        
+        
+        
+        
+        
+        
+        
+        body{
+            min-width: 1280px !important;
+            min-height: 700px;
+        }
+        #info{
+            padding-top: 1%;
+            width: 20%;
+           
+            float:left;
+        }
+        .currency{
+            
+            margin:auto;
+            width:65%;
+           
+        }
+        #point{
+            float:left;
+            text-align: left;
+            display:flex;
+            align-items: left;
+            height: 88px;
+        }
+        #face{
+            
+            height:120px;
+        }
+        
+        
+        #scroll{
+            
+            height:300px;
+            width:200px;
+            border:1px solid #000;
+            font:16px/26px Georgia, Garamond,                               Serif;overflow:auto;
+          margin-top:15%; 
+            margin-left: 20%;
+        }
+        
         
     </style>
     
     <body>
         <div id="container">
             <div id="top">
-              
+                <a href="index.html" id="imageLink"><img src="sample.png" id="logo"></a>
+                
             </div>
-            <table><tr>
-             <td>                
-<div class="image-cropper">
-<img src="Frodi.png"/></div>   
-        </td>   
-        
-        </tr>
-        <tr>
-                <td><center><h4>Frodi</h4></center> </td>
-        </tr>
-                
-                
-           <tr>
-             <td>                
-
-<img src="Coin.png"/>   
-        </td>        
-        <td><h4>500</h4></td>        
-                </tr>  
-                
-                 <tr>
-             <td>                
-
-<img src="Pills.png"/> 
-                
-        <td><h4>27</h4></td>        
-                </tr>
-                
-                 <tr>
-             <td>                
-
-<img src="Envelope.png"/> 
-                
-        <td><h4>1</h4></td>        
-                </tr>
-                
-             
-            </table>
-
+            
+            
            
             
+            <div id="scroll">
+ <button  class="butn">Art</button>
+<button  class="butn">English</button>
+<button  class="butn">Engineering</button> 
+</div>
             
             
             
             
-            
-            
-            
-                <div id="mainSection">
-             
-                    
-                    
-                    
-                
             </div>
-            <div id="rightSide">
-              
-            </div>
+        <div id="name">
+            <img src="Frodi.png" id="face"></a><br>
+        <br>
+           <h2>Michael Wrana</h2>  
+            
         </div>
+         <div id="info">
+             <div class="currency">
+             <img src="Coin.png" id="point">
+                 
+                     <h3>500</h3>
+                 
+                  
+             <img src="Envelope.png" id="point">
+                 <h3>50</h3>
+                       
+             <img src="Pills.png" id="point">
+                 <h3>5</h3>
+        </div>
+             
+            </div>      
+              
+                 
+                
+            
+           
     </body>
 </html>
