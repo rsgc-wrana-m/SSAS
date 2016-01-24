@@ -38,6 +38,12 @@ body{
             text-align: center;
             float:right;
         }
+
+input{
+     font-size: 1.5em;
+            text-align: center;
+            float:right;
+}
         .btn {
             -webkit-border-radius: 8;
             -moz-border-radius: 8;
