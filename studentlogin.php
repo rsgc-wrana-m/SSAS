@@ -28,10 +28,10 @@
                 <a href="index.html"><img src="sample.png" id="logo"></a>
             </div>
             <div id="leftSide">
-                <form>
-                    <label class="inputDesc">Email:</label> <input type="text"> <br> <br>
-                    <label class="inputDesc">Password:</label> <input type="password"> <br> <br> <br>
-                    <input type="button" class="btn" type="submit" value="Login"> <br>
+                <form action="LoginHandler.php" method="post">
+                    <label class="inputDesc">Email:</label> <input type="text" name="email" value=""> <br> <br>
+                    <label class="inputDesc">Password:</label> <input type="password" name="password" value=""> <br> <br> <br>
+                    <input  class="button" type="submit" value="Submit"> <br>
                     <a href="forgot.html">Forgot your password? </a>
                 </form>
             </div>
