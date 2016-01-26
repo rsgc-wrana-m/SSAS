@@ -17,8 +17,8 @@
     $connection = mysqli_connect($host, $user, $pass, $db, $port) or die(mysql_error());
     //getting user entered information to compare with database
     
-    $provided_email = htmlspecialchars($_POST['email']);
-    $provided_password = htmlspecialchars($_POST['password']);
+    $provided_email = htmlspecialchars(trim($_POST['email']));
+    $provided_password = htmlspecialchars(trim($_POST['password']));
     
     
     $query = "SELECT password FROM student WHERE email = ('" . $provided_email . "');";
@@ -39,9 +39,11 @@
           $row = mysqli_fetch_assoc($result);
           
           $stored_password = $row['password'];
-        
           
-          if ($stored_password == $provided_password) {
+          echo $stored_password;
+          echo "<br>";
+          
+          if (password_verify ($provided_password,$stored_password) == true) {
               session_start();
               $_SESSION['name']=$provided_email;
               header('Location: landed.php'); 

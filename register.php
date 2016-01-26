@@ -29,14 +29,14 @@
                 <a href="index.html"><img src="sample.png" id="logo"></a>
             </div>
             <div id="leftSide">
-                <form>
-                    <label class="inputDesc">Email:</label> <input type="text"> <br> <br>
-                    <label class="inputDesc">First Name:</label> <input type="text"> <br> <br>
-                    <label class="inputDesc">Last Name:</label> <input type="text"> <br> <br>
-                    <label class="inputDesc">Password:</label> <input type="password"> <br> <br>
-                    <label class="inputDesc">Confirm:</label> <input type="password"> <br> <br>
-                    <label class="inputDesc">Class Code:</label> <input type="text"> <br> <br>
-                    <input type="button" type="submit" class="btn" value="Create Account">
+                <form action="RegisterHandler.php" method="post">
+                    <label class="inputDesc">Email:</label> <input type="text" name="email"> <br> <br>
+                    <label class="inputDesc">First Name:</label> <input type="text" name="firstname"> <br> <br>
+                    <label class="inputDesc">Last Name:</label> <input type="text" name="lastname"> <br> <br>
+                    <label class="inputDesc">Password:</label> <input type="password" name="password"> <br> <br>
+                    <label class="inputDesc">Confirm:</label> <input type="password" name="cpassword"> <br> <br>
+                    <label class="inputDesc">Class Code:</label> <input type="text" name="classcode"> <br> <br>
+                    <input type="submit" class="btn" value="Create Account">
                 </form>
             </div>
             <div id="rightSide">
