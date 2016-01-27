@@ -17,8 +17,8 @@
     $connection = mysqli_connect($host, $user, $pass, $db, $port) or die(mysql_error());
     //getting user entered information to compare with database
     
-    $provided_email = htmlspecialchars($_POST['email']);
-    $provided_password = htmlspecialchars($_POST['password']);
+    $provided_email = htmlspecialchars(trim($_POST['email']));
+    $provided_password = htmlspecialchars(trim($_POST['password']));
     
     
     $query = "SELECT password FROM student WHERE email = ('" . $provided_email . "');";
@@ -31,7 +31,7 @@
   } else {
       if (mysqli_num_rows($result) == 0) {
         
-          echo "<p>user with email" . $provided_email . "does not exist</p>";
+          echo "<p>User with email <em><strong>" . $provided_email . "</em></strong> does not exist</p>";
           
       } else {
         
@@ -39,15 +39,14 @@
           $row = mysqli_fetch_assoc($result);
           
           $stored_password = $row['password'];
-        
           
-          if ($stored_password == $provided_password) {
+          if (password_verify ($provided_password,$stored_password) == true) {
               session_start();
               $_SESSION['name']=$provided_email;
               header('Location: landed.php'); 
 
           } else {
-              echo "<p>" . $provided_email . " entered an incorrect password</p>";
+              echo "<p> Account with email: <em><strong>" . $provided_email . "</em></strong> entered an incorrect password</p>";
           }
       }
   }
