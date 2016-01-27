@@ -31,7 +31,7 @@
   } else {
       if (mysqli_num_rows($result) == 0) {
         
-          echo "<p>user with email" . $provided_email . "does not exist</p>";
+          echo "<p>User with email <em><strong>" . $provided_email . "</em></strong> does not exist</p>";
           
       } else {
         
@@ -40,16 +40,13 @@
           
           $stored_password = $row['password'];
           
-          echo $stored_password;
-          echo "<br>";
-          
           if (password_verify ($provided_password,$stored_password) == true) {
               session_start();
               $_SESSION['name']=$provided_email;
               header('Location: landed.php'); 
 
           } else {
-              echo "<p>" . $provided_email . " entered an incorrect password</p>";
+              echo "<p> Account with email: <em><strong>" . $provided_email . "</em></strong> entered an incorrect password</p>";
           }
       }
   }
