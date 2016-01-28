@@ -1,9 +1,10 @@
 <?php 
 session_start();
+//Check to see if the user is already logged in
 if(isset($_SESSION['name'])){
     header('Location: landed.php'); 
 }
-
+//Checks button press
 if(isset($_POST['submit'])){
     //Creating connection parameters for database, then connecting
     $host = "209.236.71.62";
@@ -121,9 +122,6 @@ function compareValue($array,$value) {
         .errormessage {
             color:red;
             font-weight:500;
-        }
-        #registerform{
-            text-align:center;
         }
         #created {
             color:green;
