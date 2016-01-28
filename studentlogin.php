@@ -6,7 +6,6 @@ if(isset($_SESSION['name'])){
 }
 //Checks button presss
 if(isset($_POST['submit'])){
-    echo "HERE";
     //Creating connection parameters for database, then connecting
     $host = "209.236.71.62";
     $user = "mrgogor3_SSASUSR";
@@ -96,7 +95,7 @@ if(isset($_POST['submit'])){
                     <label class="inputDesc">Email:</label> <input type="text" name="email" value="<?php echo $_POST['email'] ?>"> <br> <br>
                     <label class="inputDesc">Password:</label> <input type="password" name="password" value=""> <br> <br> <br>
                     <input  class="button" type="submit" name="submit" value="Submit"> <br>
-                    <a href="forgot.html">Forgot your password? </a>
+                    <a href="forgot.php">Forgot your password? </a>
                 </form>
             </div>
             <div id="rightSide">
