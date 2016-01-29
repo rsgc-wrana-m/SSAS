@@ -140,7 +140,7 @@ function compareValue($array,$value) {
                 <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post" id="registerform">
                     <label class="inputDesc">Email:</label> <input type="text" name="email" value="<?php echo $_POST['email'] ?>"> <br><span class="errormessage"><?php echo $message['email']; ?></span> <br>
                     <label class="inputDesc">First Name:</label> <input type="text" name="firstname" value="<?php echo $_POST['firstname'] ?>"> <br> <span class="errormessage"><?php echo $message['firstname']; ?></span><br>
-                    <label class="inputDesc">Last Name:</label> <input type="text" name="lastname" value="<?php echo $_POST['lastname'] ?>"> <br><span class="errormessage"><?php echo $message['firstname']; ?></span> <br>
+                    <label class="inputDesc">Last Name:</label> <input type="text" name="lastname" value="<?php echo $_POST['lastname'] ?>"> <br><span class="errormessage"><?php echo $message['lastname']; ?></span> <br>
                     <label class="inputDesc">Password:</label> <input type="password" name="password" value=""> <br> <span class="errormessage"><?php echo $message['password']; ?></span><br>
                     <label class="inputDesc">Confirm:</label> <input type="password" name="cpassword" value=""> <br> <br>
                     <label class="inputDesc">Class Code:</label> <input type="text" name="classcode" value="<?php echo $_POST['classcode'] ?>"> <br> <span class="errormessage"><?php echo $message['classcode']; ?></span><br>
