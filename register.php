@@ -40,7 +40,7 @@
                 </form>
             </div>
             <div id="rightSide">
-                <img src="caduceus.png" id="caudecus">
+                <img src="images/caduceus.png" id="caudecus">
             </div>
         </div>
     </body>
