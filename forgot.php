@@ -39,7 +39,7 @@ if(isset($_POST['submit'])){
         $updatePass = "UPDATE student SET password='". $hashedRandomPW ."' WHERE email='".$provided_email."'";
         if ($connection->query($updatePass) === TRUE) {
         //Since the password was changed, send an email to the user containing the password in plain text
-            
+        
         $content = "YOUR PASSWORD HAS BEEN RESET \n YOUR CURRENT PASSWORD IS :'" .$randomPassword."' \n IT IS HIGHLY RECCOMENDED YOU CHANGE YOUR PASSWORD AGAIN";
         mail($provided_email,"Password Reset",$content);
         
