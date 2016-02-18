@@ -18,7 +18,8 @@
 --
 -- Table structure for table `acceptedmission`
 --
-USE DATABASE `mrgogor3_SSAS`;
+USE mrgogor3_SSAS;
+
 DROP TABLE IF EXISTS `acceptedmission`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
@@ -64,6 +65,30 @@ CREATE TABLE `chainmission` (
 LOCK TABLES `chainmission` WRITE;
 /*!40000 ALTER TABLE `chainmission` DISABLE KEYS */;
 /*!40000 ALTER TABLE `chainmission` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `class`
+--
+
+DROP TABLE IF EXISTS `class`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `class` (
+  `id` int(11) NOT NULL,
+  `class` varchar(45) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `class`
+--
+
+LOCK TABLES `class` WRITE;
+/*!40000 ALTER TABLE `class` DISABLE KEYS */;
+INSERT INTO `class` VALUES (0,'eng4u'),(1,'ems3o');
+/*!40000 ALTER TABLE `class` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -146,28 +171,6 @@ LOCK TABLES `missiontype` WRITE;
 UNLOCK TABLES;
 
 --
--- Table structure for table `class`
---
-
-DROP TABLE IF EXISTS `classes`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `class` (
-  `id` int(11) NOT NULL,
-  `class` varchar(45) NOT NULL,
-  PRIMARY KEY (`id`) 
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `class`
---
-
-LOCK TABLES `classes` WRITE;
-/*!40000 ALTER TABLE `class` DISABLE KEYS */;
-/*!40000 ALTER TABLE `class` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
 -- Table structure for table `rejectedmission`
 --
 
@@ -209,7 +212,7 @@ CREATE TABLE `student` (
   `lastname` varchar(45) DEFAULT NULL,
   `password` varchar(255) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -218,7 +221,7 @@ CREATE TABLE `student` (
 
 LOCK TABLES `student` WRITE;
 /*!40000 ALTER TABLE `student` DISABLE KEYS */;
-INSERT INTO `student` VALUES (0,'cmolloy@rsgc.on.ca','Chris','Molloy','test_password345','56789'),(1,'mwrana@rsgc.on.ca','Michael','Wrana','test_password123','12345');
+INSERT INTO `student` VALUES (1,'nramsubick@rsgc.on.ca','Nick','Ram','$2y$10$efq/zSWcH3ATr94PF4HflO8oIUaUorCUFcASjhoUnUMN8MYR3VMEi'),(2,'12345','abc','def','$2y$10$0.wisE0EVV0gxN.lY9eP..PJQLgzRRFhavtASXIw8Io83F2vPR0aC'),(3,'sbowlby@rsgc.on.ca','Scott','Bowlby','$2y$10$HU6nXI4.GphO1QBW67ftEuiL3x.gvTD9YLo1mXWRbrPQCzFabmq42'),(4,'quinnhartwig@gmail.com','Quinn','Hartwig','$2y$10$LMUQC2kAWgsNBKp5G2N9V.rRESTpQb5XEHcDIXko4HG5QthXApz.6'),(5,'rgordon@rsgc.on.ca','Russell','Gordon','$2y$10$OyInLTASsmr8LvqL2MRlc.sEjaJIzUd13GLhyHnN1.lds4Z9/nFfu'),(6,'sbowlby@gmail.com','Scotty','Bowlby','$2y$10$JVx32kxy7dV.TSu0oa54muao0HW5EVnaGBPwViN3Lgvw1lwxMq8LG'),(7,'dbowen@rsgc.on.ca','Doug','Bowen','$2y$10$xYdbbNdR7ezAHKyyWB6tguV5J2tB7OlhBxycg4.bo80HA.uKtMaSS'),(8,'mwrana@gmail.com','Michael','Wrana','$2y$10$Dait4Uzeq3phz6swF38v/OfqnGYKFK0aBwwX767A9BqZ3RUZKdMaK'),(9,'wranamichael@gmail.com','M','W','$2y$10$EXhvRvyzOCdIRhoXHD8APOa105GgmAB3lGQ1hnEmnmJubbevwMiOG'),(10,'jser@rsgc.on.ca','Jon','Ser','$2y$10$Ov8HQPKYovKnguHR8p.MJuv7JJHYdaEWQs9dBfm8yIGAcwDaFSxNm');
 /*!40000 ALTER TABLE `student` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -230,10 +233,9 @@ DROP TABLE IF EXISTS `teacher`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `teacher` (
-  `id` int(11) NOT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(45) NOT NULL,
-  `password` varchar(45) NOT NULL,
-  `salt` varchar(45) NOT NULL,
+  `password` varchar(255) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -256,4 +258,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2016-01-25 17:06:52
+-- Dump completed on 2016-02-02 16:40:48
