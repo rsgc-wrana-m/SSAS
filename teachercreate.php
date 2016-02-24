@@ -16,16 +16,15 @@ if(isset($_POST['submit'])){
     
     
     //Getting the information the user entered into the form, trimming off whitespace, and protecting agaist sql injection
-    $user_email = htmlspecialchars(trim($_POST['email']));
+    $user_name = htmlspecialchars(trim($_POST['email']));
     $user_firstname = htmlspecialchars(trim($_POST['firstname']));
     $user_lastname = htmlspecialchars(trim($_POST['lastname']));
     $user_password = htmlspecialchars(trim($_POST['password']));
     $user_confirmpassword = htmlspecialchars(trim($_POST['cpassword']));
-    $user_classcode = htmlspecialchars(trim($_POST['classcode']));
     
     
     //Getting a list of all the user accounts that use the same email as the one THIS user entered
-    $query = "SELECT email FROM student WHERE email = ('" . $user_email . "');";
+    $query = "SELECT email FROM teacher WHERE email = ('" . $user_name . "');";
     $result = mysqli_query($connection, $query);
     
     
@@ -65,25 +64,17 @@ if(isset($_POST['submit'])){
         $message['classcode']="Invalid class code";
     }
     
-    //echo $classArray;
-    
     //Checking to see if any part of the $message array is filled, if no part is filled, enter the user into database
     if(!isset($message)){
         //Hashing the user's password
         $hashedPW = password_hash($user_password, PASSWORD_DEFAULT);
         
-        $getUserClass = "SELECT * FROM Classes WHERE classname='".$user_classcode."';";
-        $userClass = mysqli_query($connection, $getUserClass);
-        $userClassID = mysqli_fetch_array($userClass)['id'];
-        
         //sql query that inserts the user into our database based on the information given
-       
-       
-       $createAccount = "INSERT INTO student (id,Classes_id,email,firstname,lastname,password) VALUES(DEFAULT,".$userClassID.",'". $user_email."','".$user_firstname."','".$user_lastname."','".$hashedPW."')";
+        $createAccount = "INSERT INTO student (id,email,firstname,lastname,password) VALUES(DEFAULT,'". $user_email."','".$user_firstname."','".$user_lastname."','".$hashedPW."')";
         
         //If the account was created successfully, echo account created, otherwise echo the error recieved by the sql server
         if ($connection->query($createAccount) === TRUE) {
-            //header('Location: studentlogin.php');
+            header('Location: studentlogin.php');
         }else {
             echo "Error: " . $createAccount . "<br>" . $connection->error;
         }
