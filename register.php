@@ -156,7 +156,7 @@ function compareValue($array,$value) {
                 </form>
             </div>
             <div id="rightSide">
-                <img src="caduceus.png">
+                <img src="images/caduceus.png">
             </div>
         </div>
     </body>
