@@ -87,7 +87,7 @@ if(isset($_POST['submit'])){
     <body>
         <div id="container">
             <div id="top">
-                <a href="index.html"><img src="images/ample.png" id="logo"></a>
+                <a href="index.html"><img src="images/sample.png" id="logo"></a>
             </div>
             <div id="leftSide">
                 <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post">
