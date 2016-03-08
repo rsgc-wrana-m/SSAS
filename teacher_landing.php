@@ -1,4 +1,12 @@
 <!DOCTYPE html>
+    <?php
+        session_start();
+        if(isset($_SESSION['name'])){
+            $email = $_SESSION['name'];
+        }else{
+            header('Location: studentlogin.php'); 
+        }
+    ?>
 <html>
     <link href='https://fonts.googleapis.com/css?family=Raleway:100,200,300,400,500,600,700,800,900' rel='stylesheet' type='text/css'>
     <link rel="icon" href="images/favicon.ico" type="image/gif" sizes="16x16">
@@ -177,13 +185,27 @@ margin-left: 20px;
         
     </style>
     <script>
+    function ENG4U1() {
+        window.alert("ENG4U-1");
+    }
     
-    function ENG4U-1() {
-   window.alert(5 + 6);
-}
+    function ENG4U2() {
+        window.alert("ENG4U-2");
+    }
+    
+    function ENG4U3() {
+        window.alert("ENG4U-3");
+    }
+    
+    function ENG4U4() {
+        window.alert("ENG4U-4");
+    }
     
     </script>
     <body>
+
+        
+        
         <div id="container">
             <div id="top">
                 
@@ -231,10 +253,10 @@ margin-left: 20px;
              <div class="currency">
              
                  
-            <span onclick="ENG4U-1()">ENG4U-1</span><br>
-            <span onclick="ENG4U-2()">ENG4U-2</span><br>
-             <span onclick="ENG4U-3()">ENG4U-3</span><br>
-             <span onclick="ENG4U-4()">ENG4U-4</span><br>
+            <span onclick="ENG4U1()">ENG4U-1</span><br>
+            <span onclick="ENG4U2()">ENG4U-2</span><br>
+             <span onclick="ENG4U3()">ENG4U-3</span><br>
+             <span onclick="ENG4U4()">ENG4U-4</span><br>
                  <span>Create Mision</span><br>
         </div>
              

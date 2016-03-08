@@ -40,7 +40,7 @@ if(isset($_POST['submit'])){
     //Get the password which the user entered, and compare it to the password in the database
     $row = mysqli_fetch_assoc($result);
     $stored_password = $row['password'];
-    if (password_verify ($provided_password,$stored_password) == false) {
+    if ($provided_password != $stored_password) {
         $message['wrong_pass'] = "The password you entered was incorrect";
     }
     
@@ -49,7 +49,7 @@ if(isset($_POST['submit'])){
         echo "HERE";
         session_start();
         $_SESSION['name']=$provided_name;
-        header('Location: teacherlogin.php'); 
+        header('Location: teacher_landing.php'); 
         
     }
          
@@ -92,7 +92,6 @@ if(isset($_POST['submit'])){
                     <label class="inputDesc">Password:</label> <input type="password" name="password" value=""> <br> <br> <br>
                     <input  class="button" type="submit" name="submit" value="Submit"> <br>
                     <a href="forgot.php">Forgot your password? </a> <br>
-                    <a href="teachercreate.php">Create Account </a>
                 </form>
             </div>
             <div id="rightSide">

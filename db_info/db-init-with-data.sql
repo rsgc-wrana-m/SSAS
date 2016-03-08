@@ -2,7 +2,7 @@
 --
 -- Host: 209.236.71.62    Database: mrgogor3_SSAS
 -- ------------------------------------------------------
--- Server version	5.6.28
+-- Server version	5.6.29
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -16,15 +16,38 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
+-- Table structure for table `Classes`
+--
+
+DROP TABLE IF EXISTS `Classes`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `Classes` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `classname` varchar(45) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `Classes`
+--
+
+LOCK TABLES `Classes` WRITE;
+/*!40000 ALTER TABLE `Classes` DISABLE KEYS */;
+INSERT INTO `Classes` VALUES (1,'eng4u'),(2,'ems3o');
+/*!40000 ALTER TABLE `Classes` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `acceptedmission`
 --
-USE mrgogor3_SSAS;
 
 DROP TABLE IF EXISTS `acceptedmission`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `acceptedmission` (
-  `id` int(11) NOT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `mission_id` int(11) NOT NULL,
   `student_id` int(11) NOT NULL,
   PRIMARY KEY (`id`),
@@ -32,7 +55,7 @@ CREATE TABLE `acceptedmission` (
   KEY `fk_acceptedmission_student1_idx` (`student_id`),
   CONSTRAINT `fk_acceptedmission_mission1` FOREIGN KEY (`mission_id`) REFERENCES `mission` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `fk_acceptedmission_student1` FOREIGN KEY (`student_id`) REFERENCES `student` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -41,6 +64,7 @@ CREATE TABLE `acceptedmission` (
 
 LOCK TABLES `acceptedmission` WRITE;
 /*!40000 ALTER TABLE `acceptedmission` DISABLE KEYS */;
+INSERT INTO `acceptedmission` VALUES (1,1,1);
 /*!40000 ALTER TABLE `acceptedmission` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -68,30 +92,6 @@ LOCK TABLES `chainmission` WRITE;
 UNLOCK TABLES;
 
 --
--- Table structure for table `class`
---
-
-DROP TABLE IF EXISTS `class`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `class` (
-  `id` int(11) NOT NULL,
-  `class` varchar(45) NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `class`
---
-
-LOCK TABLES `class` WRITE;
-/*!40000 ALTER TABLE `class` DISABLE KEYS */;
-INSERT INTO `class` VALUES (0,'eng4u'),(1,'ems3o');
-/*!40000 ALTER TABLE `class` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
 -- Table structure for table `failedmission`
 --
 
@@ -99,7 +99,7 @@ DROP TABLE IF EXISTS `failedmission`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `failedmission` (
-  `id` int(11) NOT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `mission_id` int(11) NOT NULL,
   `student_id` int(11) NOT NULL,
   PRIMARY KEY (`id`),
@@ -127,7 +127,7 @@ DROP TABLE IF EXISTS `mission`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `mission` (
-  `id` int(11) NOT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `missiontype_id` int(11) NOT NULL,
   `name` varchar(45) NOT NULL,
   `description` longtext NOT NULL,
@@ -135,7 +135,7 @@ CREATE TABLE `mission` (
   PRIMARY KEY (`id`),
   KEY `fk_mission_missiontypes_idx` (`missiontype_id`),
   CONSTRAINT `fk_mission_missiontypes` FOREIGN KEY (`missiontype_id`) REFERENCES `missiontype` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -144,6 +144,7 @@ CREATE TABLE `mission` (
 
 LOCK TABLES `mission` WRITE;
 /*!40000 ALTER TABLE `mission` DISABLE KEYS */;
+INSERT INTO `mission` VALUES (1,2,'Paint the Mona Lisa','http://imgur.com/gallery/iFRlx','http://imgur.com/gallery/DPpFrRx');
 /*!40000 ALTER TABLE `mission` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -155,10 +156,10 @@ DROP TABLE IF EXISTS `missiontype`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `missiontype` (
-  `id` int(11) NOT NULL,
-  `mtype` varchar(45) NOT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `Type` varchar(45) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -167,6 +168,7 @@ CREATE TABLE `missiontype` (
 
 LOCK TABLES `missiontype` WRITE;
 /*!40000 ALTER TABLE `missiontype` DISABLE KEYS */;
+INSERT INTO `missiontype` VALUES (1,'Science'),(2,'Math');
 /*!40000 ALTER TABLE `missiontype` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -178,7 +180,7 @@ DROP TABLE IF EXISTS `rejectedmission`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `rejectedmission` (
-  `id` int(11) NOT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `mission_id` int(11) NOT NULL,
   `student_id` int(11) NOT NULL,
   PRIMARY KEY (`id`),
@@ -207,23 +209,20 @@ DROP TABLE IF EXISTS `student`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `student` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
+  `Classes_id` int(11) NOT NULL,
   `email` varchar(45) NOT NULL,
   `firstname` varchar(45) NOT NULL,
-  `lastname` varchar(45) DEFAULT NULL,
+  `lastname` varchar(45) NOT NULL,
   `password` varchar(255) NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=latin1;
+  PRIMARY KEY (`id`),
+  KEY `fk_student_Classes1_idx` (`Classes_id`),
+  CONSTRAINT `fk_student_Classes1` FOREIGN KEY (`Classes_id`) REFERENCES `Classes` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Dumping data for table `student`
 --
-
-LOCK TABLES `student` WRITE;
-/*!40000 ALTER TABLE `student` DISABLE KEYS */;
-INSERT INTO `student` VALUES (1,'nramsubick@rsgc.on.ca','Nick','Ram','$2y$10$efq/zSWcH3ATr94PF4HflO8oIUaUorCUFcASjhoUnUMN8MYR3VMEi'),(2,'12345','abc','def','$2y$10$0.wisE0EVV0gxN.lY9eP..PJQLgzRRFhavtASXIw8Io83F2vPR0aC'),(3,'sbowlby@rsgc.on.ca','Scott','Bowlby','$2y$10$HU6nXI4.GphO1QBW67ftEuiL3x.gvTD9YLo1mXWRbrPQCzFabmq42'),(4,'quinnhartwig@gmail.com','Quinn','Hartwig','$2y$10$LMUQC2kAWgsNBKp5G2N9V.rRESTpQb5XEHcDIXko4HG5QthXApz.6'),(5,'rgordon@rsgc.on.ca','Russell','Gordon','$2y$10$OyInLTASsmr8LvqL2MRlc.sEjaJIzUd13GLhyHnN1.lds4Z9/nFfu'),(6,'sbowlby@gmail.com','Scotty','Bowlby','$2y$10$JVx32kxy7dV.TSu0oa54muao0HW5EVnaGBPwViN3Lgvw1lwxMq8LG'),(7,'dbowen@rsgc.on.ca','Doug','Bowen','$2y$10$xYdbbNdR7ezAHKyyWB6tguV5J2tB7OlhBxycg4.bo80HA.uKtMaSS'),(8,'mwrana@gmail.com','Michael','Wrana','$2y$10$Dait4Uzeq3phz6swF38v/OfqnGYKFK0aBwwX767A9BqZ3RUZKdMaK'),(9,'wranamichael@gmail.com','M','W','$2y$10$EXhvRvyzOCdIRhoXHD8APOa105GgmAB3lGQ1hnEmnmJubbevwMiOG'),(10,'jser@rsgc.on.ca','Jon','Ser','$2y$10$Ov8HQPKYovKnguHR8p.MJuv7JJHYdaEWQs9dBfm8yIGAcwDaFSxNm');
-/*!40000 ALTER TABLE `student` ENABLE KEYS */;
-UNLOCK TABLES;
 
 --
 -- Table structure for table `teacher`
@@ -235,9 +234,9 @@ DROP TABLE IF EXISTS `teacher`;
 CREATE TABLE `teacher` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(45) NOT NULL,
-  `password` varchar(255) NOT NULL,
+  `password` varchar(45) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -246,6 +245,7 @@ CREATE TABLE `teacher` (
 
 LOCK TABLES `teacher` WRITE;
 /*!40000 ALTER TABLE `teacher` DISABLE KEYS */;
+INSERT INTO `teacher` VALUES (1,'PDarvasi','mediastudies');
 /*!40000 ALTER TABLE `teacher` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -258,4 +258,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2016-02-02 16:40:48
+-- Dump completed on 2016-03-07 17:20:19
