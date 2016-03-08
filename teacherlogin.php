@@ -49,7 +49,7 @@ if(isset($_POST['submit'])){
         echo "HERE";
         session_start();
         $_SESSION['name']=$provided_name;
-        header('Location: teacher_landing.php'); 
+        header('Location: teacherlanding.php'); 
         
     }
          

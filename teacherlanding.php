@@ -118,18 +118,45 @@
             $getStudents = "select * from student";
             $students = mysqli_query($connection, $getStudents);
             
+
+            //Creating three arrays, for each piece of important information needed from the student table within the database
             $id = array();
             $firstNames = array();
             $lastNames = array();
             
+            //Loop through each row of the result table, extracting useful information as needed, for example: extracting the student id from each row, and placing it into a seperate array
             while ($row = mysqli_fetch_array($students)) {
+        
                 array_push($id, $row["id"]);
                 array_push($firstNames,$row["firstname"]);
                 array_push($lastNames,$row["lastname"]);
+                
+                
             }
-            
+            //iterating through each student in the student table, and echoing html code
             for ($i = 0; $i < count($id); $i++){
-                echo "<div class='aStudent' id='$id[$i]'> <span class='studentName'>$firstNames[$i] $lastNames[$i]</span><span class='missionStatus'>No Mission</span><span class='acceptMission'> A </span></div>";
+                
+                //getting a list of the currently active missions, for which the currently selected student is undertaking
+                $getActiveMission = "select * from acceptedmission where student_id=$id[$i]";
+                $activeMission = mysqli_query($connection, $getActiveMission);
+                
+                //If there are no active missions, with this student's id, then state that the student has no active missions
+                if($activeMission->num_rows == 0){
+                    echo "here";
+                    $currentMission = "No Mission";
+                }else{
+                    //If the student is currently undertaking a mission, get the id of that mission, go to the mission list table, and retreive the name of said mission
+                    $activeMissionRow = mysqli_fetch_array($activeMission);
+                    $activeMissionID = $activeMissionRow["mission_id"];
+                    $getMissionName = "select * from mission where id=$activeMissionID";
+                    $missionName = mysqli_query($connection, $getMissionName);
+                    $missionNameRow = mysqli_fetch_array($missionName);
+                    $currentMission = $missionNameRow["name"];
+                }
+                
+                
+                //based on the information collected above, create a div entry that represents the student in the current position in the array
+                echo "<div class='aStudent' id='$id[$i]'> <span class='studentName'>$firstNames[$i] $lastNames[$i] - </span><span class='missionStatus'>$currentMission</span><span class='acceptMission'> A </span></div>";
                 
             }
             
@@ -143,17 +170,6 @@
     }
 }
             ?>
-            
-            
-            
-            
-            
-            
-            <div class="aStudent">
-                <span class="studentName">Michael Wrana - </span>
-                <span class="missionStatus">No Mission</span>
-                <span class="acceptMission">A</span>
-            </div>
             
             </div>
         
