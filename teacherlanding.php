@@ -99,7 +99,7 @@
             </h3>
             
             <h3 class="Link">
-                Create Mission <br><br>
+                <a href="create_mission.php">Create Mission</a> <br><br>
             </h3>
             
             </div>
