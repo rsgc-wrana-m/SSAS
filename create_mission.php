@@ -26,15 +26,59 @@
             $getMissions = "select * from mission";
             $missions = mysqli_query($connection, $getMissions);
             
-            $missionNames = array();
+            //get a list of all the mission categories
+            $getMissionTypes = "select * from missiontype";
+            $missionTypes = mysqli_query($connection, $getMissionTypes);
             
+            //Get a list of all the mission names that already exist
+            $missionNames = array();
             while ($row = mysqli_fetch_array($missions)) {
                 array_push($missionNames, $row["name"]);
             }
             
+            //Get a list of all the mission types that already exist
+            $missionTypeNames = array();
+            while ($row = mysqli_fetch_array($missionTypes)) {
+                array_push($missionTypeNames, $row["Type"]);
+            }
             
+            //Determine if the name the user entered already exists in the database
+            if(compareValue($missionNames,$provided_name)){
+                $message['name'] = "A mission with this name already exists";
+                echo "here";
+            }
+            //Determine if the mission type the user entered exists
+            if(compareValue($missionTypeNames,$provided_cat) == false){
+                $message["type"] = "This mission type does not exist";
+                echo "here";
+            }
             
+            //If all checks pass, create the mission
+            if(!isset($message)){
+                
+                //gets the mission type id, based on the name the user entered
+                
+                echo $provided_cat;
+                $getMissionTypeID = "select * from missiontype where Type='$provided_cat';";
+                $missionTypeID = mysqli_query($connection, $getMissionTypeID);
+                $missionType = mysqli_fetch_array($missionTypeID);
+                $missionType2 = $missionType['id'];
+                
+                //Create the query, and apply it to the database, then redirect user to landing page
+                $makeMission = "insert into mission(id,missiontype_id,name,description,rubric) values(DEFAULT,$missionType2,'$provided_name','$provided_desc','$provided_rubric');";
+                mysqli_query($connection,$makeMission);
+                header('Location: teacherlanding.php');
+            }
+
         }
+        
+                    function compareValue($array,$value) {
+                for ($i = 0; $i < count($array); $i++) {
+                    if($array[$i] == $value) {
+                    return true;
+                    }
+                }
+            }
     ?>
 <!DOCTYPE html>
 <html>
@@ -151,8 +195,8 @@
         
             <div id="right">
             <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post">
-                <label class="inputDesc">Mission Name:</label><input type="text" name="missionName" value="<?php echo $_POST['missionName'] ?>"> <br><br>
-                <label class="inputDesc">Mission category:</label><input type="text" name="missionCat" value="<?php echo $_POST['missionCat'] ?>"> <br><br>
+                <label class="inputDesc">Mission Name:</label><input type="text" name="missionName" value="<?php echo $_POST['missionName'] ?>"><span class="errormessage"><?php echo $message['name']; ?></span> <br><br>
+                <label class="inputDesc">Mission category:</label><input type="text" name="missionCat" value="<?php echo $_POST['missionCat'] ?>"><span class="errormessage"><?php echo $message['type']; ?></span> <br><br>
                 <label class="inputDesc">Mission Description (link):</label><input type="text" name="missionDesc" value="<?php echo $_POST['missionDesc'] ?>"> <br><br>
                 <label class="inputDesc">Mission Rubric (link):</label><input type="text" name="missionRubric" value="<?php echo $_POST['missionRubric'] ?>"> <br><br>
                 <input  class="button" type="submit" name="submit" value="Submit">
