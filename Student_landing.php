@@ -113,13 +113,16 @@ margin-left: 20px;
             font-family: 'Raleway', sans-serif;
             min-width: 1280px ;
             min-height: 700px;
-            overflow:hidden;
         }
         #info{
             padding-top: 1%;
             width: 20%;
            
             float:left;
+              padding-top: 10%;
+           
+            width: 20%;
+           text-align: center;
         }
         .currency{
             
