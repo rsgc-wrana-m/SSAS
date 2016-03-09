@@ -37,19 +37,11 @@
             font-size: 2em;
             
 margin-left: 20px;
-        float:left;
+       
             
             
         }
-        #mainSection{
-            align:center;
-            margin:auto;
-            
-            width:80%;
-            text-align: center;
-            color:rgb(21,119,204);
-            font-weight: 700;
-        }
+       
         a{
             padding-left: 10px;
             padding-right: 10px;
@@ -65,9 +57,7 @@ margin-left: 20px;
             color:#7EB3E0;
             text-decoration: underline;
         }
-        #imageLink{
-            padding:0;
-        }
+       
         
         #name{
             padding-top: 10%;
@@ -108,23 +98,14 @@ margin-left: 20px;
         
         
         body{
-            margin:0;
+           
             font-family: 'Raleway', sans-serif;
-            margin:0;
+          
             font-family: 'Raleway', sans-serif;
             min-width: 1280px ;
             min-height: 700px;
         }
-        #info{
-            padding-top: 1%;
-            width: 20%;
-           
-            float:left;
-              padding-top: 10%;
-           
-            width: 20%;
-           text-align: center;
-        }
+      
         .currency{
             
             margin:auto;
@@ -137,6 +118,7 @@ margin-left: 20px;
             display:flex;
             align-items: left;
             height: 100px;
+            
         }
         #face{
             
@@ -153,19 +135,17 @@ margin-left: 20px;
          
             margin-left: 19.6%;
         }
-     textarea {
-   resize: none;
-}
+  
         #text{
-            overflow:auto;
+           
             
-            right:0;
+           
             height:100%;
             width:59.9%;
             min-width:59.9%; 
-            margin-right: 10px;
-            font:16px/26px Georgia, Garamond,                               Serif;overflow:auto;
-          
+           
+           
+        
             float: right;
             
             border-bottom:solid black 1px;
@@ -176,7 +156,7 @@ margin-left: 20px;
     </style>
     
     <body>
-        <div id="container">
+        
             <div id="top">
                 
                 
@@ -263,10 +243,12 @@ margin-left: 20px;
         echo " <div id='text'>
                 <h3>Title:$missionName[$i]</h3>                  
                 <br>
+                <br>
                 <h3>Description:<a>$missionDesc[$i]</a></h3>
                 <br>
-                <h3>Rubric:<a>$missionRubric[$i]</a></h3>
                 <br>
+                <h3>Rubric:<a>$missionRubric[$i]</a></h3>
+                <br><br>
                 <h2><a>Accept</a></h2>
                 </div> ";
     }
@@ -280,7 +262,7 @@ margin-left: 20px;
            <h2>Michael Wrana</h2>  
             <img src="images/Coin.png" id="point">
                  
-                     <h3>500</h3>
+                     <h3>500</h3><br>
                  
                   
              <img src="images/Envelope.png" id="point">
