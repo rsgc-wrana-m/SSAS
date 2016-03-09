@@ -16,7 +16,7 @@
     <title>RSGC SSAS</title>
     
     <style>
-        
+       
         h1{
             text-align: left;
             font-size: 6em;
@@ -74,6 +74,7 @@ margin-left: 20px;
            img-align:middle;
             width: 20%;
            text-align: center;
+           position:fixed;
          
         
         }
@@ -135,7 +136,7 @@ margin-left: 20px;
             text-align: left;
             display:flex;
             align-items: left;
-            height: 88px;
+            height: 100px;
         }
         #face{
             
@@ -277,11 +278,7 @@ margin-left: 20px;
             <br>
         <br>
            <h2>Michael Wrana</h2>  
-            
-        </div>
-         <div id="info">
-             <div class="currency">
-             <img src="images/Coin.png" id="point">
+            <img src="images/Coin.png" id="point">
                  
                      <h3>500</h3>
                  
@@ -291,6 +288,10 @@ margin-left: 20px;
                        
              <img src="images/Pills.png" id="point">
                  <h3>5</h3>
+        </div>
+         <div id="info">
+             <div class="currency">
+             
         </div>
              
             </div>      
