@@ -228,9 +228,9 @@ margin-left: 20px;
         echo " <div id='text'>
                 <h3>Title:$missionName[$i]</h3>                  
                 <br>
-                <h3>Description:<a>$missionDesc[$i]</a></h3>
+                <h3>Description:<a href='$missionDesc[$i]'>$missionDesc[$i]</a></h3>
                 <br>
-                <h3>Rubric:<a>$missionRubric[$i]</a></h3>
+                <h3>Rubric:<a href='$missionRubric[$i]'>$missionRubric[$i]</a></h3>
                 <br>
                 <h2><a>Accept</a></h2>
                 </div> ";
