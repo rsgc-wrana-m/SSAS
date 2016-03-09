@@ -163,6 +163,8 @@ margin-left: 20px;
             font:16px/26px Georgia, Garamond,                               Serif;overflow:auto;
           
             float: right;
+            
+            border-bottom:solid black 1px;
           
         }
          
@@ -207,10 +209,10 @@ margin-left: 20px;
     //Checking to see if the math button was pressed
     if(isset($_POST['mathSubmit'])){
         //echo "Math Mission requested";
-        
+        //Get the list of missions, that apply to the type of mission the student selected
         $getMissions = "select * from mission where missiontype_id=2;";
         $missions = mysqli_query($connection, $getMissions);
-        
+        //Populate arrays of mission names, descriptions and rubrics, which can then later be used while looping the creation of each mission info
         $missionName = array();
         $missionDesc = array();
         $missionRubric = array();
@@ -222,13 +224,13 @@ margin-left: 20px;
     }
     
     for($i = 0; $i < count($missionName); $i++){
-        
+        //insert this div element into the page, changing the description, rubric, title values based on each element in the respective array
         echo " <div id='text'>
                 <h3>Title:$missionName[$i]</h3>                  
                 <br>
-                <h3>Description:$missionDesc[$i]</h3>
+                <h3>Description:<a>$missionDesc[$i]</a></h3>
                 <br>
-                <h3>Rubric:$missionRubric[$i]</h3>
+                <h3>Rubric:<a>$missionRubric[$i]</a></h3>
                 <br>
                 <h2><a>Accept</a></h2>
                 </div> ";
@@ -238,6 +240,33 @@ margin-left: 20px;
     
     if(isset($_POST['scienceSubmit'])){
         //echo "Science Mission requested";
+                //Get the list of missions, that apply to the type of mission the student selected
+        $getMissions = "select * from mission where missiontype_id=1;";
+        $missions = mysqli_query($connection, $getMissions);
+        //Populate arrays of mission names, descriptions and rubrics, which can then later be used while looping the creation of each mission info
+        $missionName = array();
+        $missionDesc = array();
+        $missionRubric = array();
+        
+    while ($row = mysqli_fetch_array($missions)) {
+        array_push($missionName, $row["name"]);
+        array_push($missionDesc, $row["description"]);
+        array_push($missionRubric, $row["rubric"]);
+    }
+    
+    for($i = 0; $i < count($missionName); $i++){
+        //insert this div element into the page, changing the description, rubric, title values based on each element in the respective array
+        echo " <div id='text'>
+                <h3>Title:$missionName[$i]</h3>                  
+                <br>
+                <h3>Description:<a>$missionDesc[$i]</a></h3>
+                <br>
+                <h3>Rubric:<a>$missionRubric[$i]</a></h3>
+                <br>
+                <h2><a>Accept</a></h2>
+                </div> ";
+    }
+        
     }
     
     ?>
