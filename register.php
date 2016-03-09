@@ -83,7 +83,7 @@ if(isset($_POST['submit'])){
         
         //If the account was created successfully, echo account created, otherwise echo the error recieved by the sql server
         if ($connection->query($createAccount) === TRUE) {
-            //header('Location: studentlogin.php');
+            header('Location: studentlogin.php');
         }else {
             echo "Error: " . $createAccount . "<br>" . $connection->error;
         }

@@ -142,7 +142,6 @@
                 
                 //If there are no active missions, with this student's id, then state that the student has no active missions
                 if($activeMission->num_rows == 0){
-                    echo "here";
                     $currentMission = "No Mission";
                 }else{
                     //If the student is currently undertaking a mission, get the id of that mission, go to the mission list table, and retreive the name of said mission

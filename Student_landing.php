@@ -1,3 +1,13 @@
+    <?php
+    session_start();
+    if(isset($_SESSION['name'])){
+       $email = $_SESSION['name'];
+    }else{
+        header('Location: studentlogin.php'); 
+    }
+    ?>
+    
+
 <!DOCTYPE html>
 <html>
     <link href='https://fonts.googleapis.com/css?family=Raleway:100,200,300,400,500,600,700,800,900' rel='stylesheet' type='text/css'>
@@ -145,7 +155,6 @@ margin-left: 20px;
         #text{
             overflow:auto;
             
-            position:absolute;
             right:0;
             height:100%;
             width:59.9%;
@@ -171,36 +180,67 @@ margin-left: 20px;
            
             
             <div id="scroll">
-                
-<input type="button" class="butn" value="Example">
-<input type="button" class="butn" value="Example">
-<input type="button" class="butn" value="Example">
-<input type="button" class="butn" value="Example">
-<input type="button" class="butn" value="Example">
-<input type="button" class="butn" value="Example">
-<input type="button" class="butn" value="Example">
-<input type="button" class="butn" value="Example">                
- <input type="button" class="butn" value="Example">
-<input type="button" class="butn" value="Example">
-<input type="button" class="butn" value="Example">
-<input type="button" class="butn" value="Example">
-<input type="button" class="butn" value="Example">
-<input type="button" class="butn" value="Example">
-<input type="button" class="butn" value="Example">
-<input type="button" class="butn" value="Example">               
-
-</div>
+                <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post">
+                    <input type="submit" name="mathSubmit" class="butn" value="Math">
+                </form>
+                <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post">
+                    <input type="submit" name="scienceSubmit" class="butn" value="Science">
+                </form>
+            </div>
             
              
               
             
             
             </div>
-              <div id="text">
-<h3>Title:</h3>                  
-<br>
-<h3>Description:</h3><br>
-</div>  
+            
+    <?php
+    //Creating connection parameters for database, then connecting
+    $host = "209.236.71.62";
+    $user = "mrgogor3_SSASUSR";
+    $pass = "price498)focal";
+    $db = "mrgogor3_SSAS";
+    $port = 3306;
+    $connection = mysqli_connect($host, $user, $pass, $db, $port) or die(mysql_error());
+    
+    
+    //Checking to see if the math button was pressed
+    if(isset($_POST['mathSubmit'])){
+        //echo "Math Mission requested";
+        
+        $getMissions = "select * from mission where missiontype_id=2;";
+        $missions = mysqli_query($connection, $getMissions);
+        
+        $missionName = array();
+        $missionDesc = array();
+        $missionRubric = array();
+        
+    while ($row = mysqli_fetch_array($missions)) {
+        array_push($missionName, $row["name"]);
+        array_push($missionDesc, $row["description"]);
+        array_push($missionRubric, $row["rubric"]);
+    }
+    
+    for($i = 0; $i < count($missionName); $i++){
+        
+        echo " <div id='text'>
+                <h3>Title:$missionName[$i]</h3>                  
+                <br>
+                <h3>Description:$missionDesc[$i]</h3>
+                <br>
+                <h3>Rubric:$missionRubric[$i]</h3>
+                <br>
+                <h2><a>Accept</a></h2>
+                </div> ";
+    }
+        
+    }
+    
+    if(isset($_POST['scienceSubmit'])){
+        //echo "Science Mission requested";
+    }
+    
+    ?>
         <div id="name">
             <br>
         <br>
@@ -215,7 +255,7 @@ margin-left: 20px;
                  
                   
              <img src="images/Envelope.png" id="point">
-                 <h3>50</h3>
+                 <h3>50</h3> <br>
                        
              <img src="images/Pills.png" id="point">
                  <h3>5</h3>
