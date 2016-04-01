@@ -194,7 +194,7 @@ margin-left: 20px;
     if(isset($_POST['mathSubmit'])){
         //echo "Math Mission requested";
         //Get the list of missions, that apply to the type of mission the student selected
-        $getMissions = "select * from mission where missiontype_id=2;";
+        $getMissions = "select * from mission where missiontype_id=1;";
         $missions = mysqli_query($connection, $getMissions);
         //Populate arrays of mission names, descriptions and rubrics, which can then later be used while looping the creation of each mission info
         $missionName = array();
