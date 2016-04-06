@@ -79,7 +79,7 @@ if(isset($_POST['submit'])){
         //sql query that inserts the user into our database based on the information given
        
        
-       $createAccount = "INSERT INTO student (id,Classes_id,email,firstname,lastname,password) VALUES(DEFAULT,".$userClassID.",'". $user_email."','".$user_firstname."','".$user_lastname."','".$hashedPW."')";
+       $createAccount = "INSERT INTO student (id,Classes_id,email,firstname,lastname,password,coins,pills,envelopes) VALUES(DEFAULT,".$userClassID.",'". $user_email."','".$user_firstname."','".$user_lastname."','".$hashedPW."',0,0,0)";
         
         //If the account was created successfully, echo account created, otherwise echo the error recieved by the sql server
         if ($connection->query($createAccount) === TRUE) {

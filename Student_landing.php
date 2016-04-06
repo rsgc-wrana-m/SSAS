@@ -1,15 +1,127 @@
     <?php
+    
+    //Creating connection parameters for database, then connecting
+    $host = "209.236.71.62";
+    $user = "mrgogor3_SSASUSR";
+    $pass = "price498)focal";
+    $db = "mrgogor3_SSAS";
+    $port = 3306;
+    $connection = mysqli_connect($host, $user, $pass, $db, $port) or die(mysql_error());
+    
     session_start();
     if(isset($_SESSION['name'])){
-       $email = $_SESSION['name'];
+    $email = $_SESSION['name'];
+    
+    $getSubjects = "select * from missiontype";
+    $subjects = mysqli_query($connection, $getSubjects);
+    
+    $subjectArray = array();
+    while ($row = mysqli_fetch_array($subjects)) {
+        array_push($subjectArray, $row["Type"]);
+    }
+    
+    $buttonArray = array();
+    
+    
+    
+    foreach($subjectArray as $subject){
+        $buttonHTML = "<form action='".$_SERVER['PHP_SELF']."' method='POST'>
+                        <input type='hidden' name='subject' value='".$subject."'>
+                        <input type='submit' name='subjectSubmit' class='butn' value='".$subject."'>
+                        </form>";
+        
+        
+        
+        array_push($buttonArray, $buttonHTML);
+    }
     }else{
         header('Location: studentlogin.php'); 
     }
-    ?>
+    
+    if(isset($_POST['subjectSubmit'])){
+         $subject = htmlspecialchars(trim($_POST['subject']));
+         
+        $getSubjectID = "select * from missiontype where Type='$subject';";
+        $subjectID = mysqli_query($connection, $getSubjectID);
+        
+        $row = mysqli_fetch_array($subjectID);
+        $subjectID = $row['id'];
+        
+        
+        
+        $getMissions = "select * from mission where missiontype_id=".$subjectID.";";
+        $Missions = mysqli_query($connection, $getMissions);
+        
+        
+        
+        $missionNames = array();
+        $missionDescs = array();
+        $missionRubrics = array();
+        $missionIDs = array();
+        
+        while ($row = mysqli_fetch_array($Missions)) {
+        array_push($missionNames, $row["name"]);
+        array_push($missionDescs, $row["description"]);
+        array_push($missionRubrics, $row["rubric"]);
+        array_push($missionIDs, $row["id"]);
+        
+        }
+        
+        
+        $avaliableMissions = array();
+        
+        for($i = 0; $i < count($missionNames); $i++){
+            $mission="<form id='text' action='".$_SERVER['PHP_SELF']."' method='POST'>
+                <h3>Title: $missionNames[$i]</h3><br>
+                <h3>Description:<a href='$missionDescs[$i]'>$missionDescs[$i]</a></h3><br>
+                <h3>Rubric:<a href='$missionRubrics[$i]'>$missionRubrics[$i]</a></h3><br>
+                <input type='hidden' name='missionID' value='".$missionIDs[$i]."'>
+                <input type='submit' name='acceptMission' value='Accept'>
+                </form>";
+                
+            array_push($avaliableMissions, $mission);
+        }
+        
+    }
+    
+    if(isset($_POST['acceptMission'])){
+        
+        $getLoggedIn = "select * from student where email='".$email."';";
+        $loggedIn = mysqli_query($connection, $getLoggedIn);
+        
+        $userID = mysqli_fetch_array($loggedIn)['id'];
+        $missionID = htmlspecialchars(trim($_POST['missionID']));
+        
+        $getUserMissions = "select * from acceptedmission where student_id=".$userID.";";
+        $UserMission = mysqli_query($connection, $getUserMissions);
+
+        
+        if($UserMission->num_rows === 0)$alreadyAccepted = false;
+        else $alreadyAccepted = true;
+        
+    
+        
+        if($alreadyAccepted){
+            echo "mission already accepted";
+        }else{
+            $addMission = "insert into acceptedmission(id,mission_id,student_id) values(0,".$missionID.",".$userID.");";
+            
+            if ($connection->query($addMission) === TRUE) {
+            echo "mission accepted";
+            }else {
+            echo "Error: " . $createAccount . "<br>" . $connection->error;
+            }
+        }
+        
+    }
+    
+    
+?>
     
 
 <!DOCTYPE html>
 <html>
+
     <link href='https://fonts.googleapis.com/css?family=Raleway:100,200,300,400,500,600,700,800,900' rel='stylesheet' type='text/css'>
     <link rel="icon" href="images/favicon.ico" type="image/gif" sizes="16x16">
     
@@ -35,8 +147,7 @@
 
            
             font-size: 2em;
-            
-margin-left: 20px;
+            margin-left: 20px;
        
             
             
@@ -166,96 +277,12 @@ margin-left: 20px;
            
             
             <div id="scroll">
-                <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post">
-                    <input type="submit" name="mathSubmit" class="butn" value="Math">
-                </form>
-                <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post">
-                    <input type="submit" name="scienceSubmit" class="butn" value="Science">
-                </form>
+            <?php foreach($buttonArray as $buttonHTML){echo $buttonHTML;}?>
             </div>
             
-             
-              
-            
+            <?php if(isset($_POST['subjectSubmit'])){foreach($avaliableMissions as $avaliableMission){echo $avaliableMission;}}?>
             
             </div>
-            
-    <?php
-    //Creating connection parameters for database, then connecting
-    $host = "209.236.71.62";
-    $user = "mrgogor3_SSASUSR";
-    $pass = "price498)focal";
-    $db = "mrgogor3_SSAS";
-    $port = 3306;
-    $connection = mysqli_connect($host, $user, $pass, $db, $port) or die(mysql_error());
-    
-    
-    //Checking to see if the math button was pressed
-    if(isset($_POST['mathSubmit'])){
-        //echo "Math Mission requested";
-        //Get the list of missions, that apply to the type of mission the student selected
-        $getMissions = "select * from mission where missiontype_id=1;";
-        $missions = mysqli_query($connection, $getMissions);
-        //Populate arrays of mission names, descriptions and rubrics, which can then later be used while looping the creation of each mission info
-        $missionName = array();
-        $missionDesc = array();
-        $missionRubric = array();
-        
-    while ($row = mysqli_fetch_array($missions)) {
-        array_push($missionName, $row["name"]);
-        array_push($missionDesc, $row["description"]);
-        array_push($missionRubric, $row["rubric"]);
-    }
-    
-    for($i = 0; $i < count($missionName); $i++){
-        //insert this div element into the page, changing the description, rubric, title values based on each element in the respective array
-        echo " <div id='text'>
-                <h3>Title:$missionName[$i]</h3>                  
-                <br>
-                <h3>Description:<a href='$missionDesc[$i]'>$missionDesc[$i]</a></h3>
-                <br>
-                <h3>Rubric:<a href='$missionRubric[$i]'>$missionRubric[$i]</a></h3>
-                <br>
-                <h2><a>Accept</a></h2>
-                </div> ";
-    }
-        
-    }
-    
-    if(isset($_POST['scienceSubmit'])){
-        //echo "Science Mission requested";
-                //Get the list of missions, that apply to the type of mission the student selected
-        $getMissions = "select * from mission where missiontype_id=1;";
-        $missions = mysqli_query($connection, $getMissions);
-        //Populate arrays of mission names, descriptions and rubrics, which can then later be used while looping the creation of each mission info
-        $missionName = array();
-        $missionDesc = array();
-        $missionRubric = array();
-        
-    while ($row = mysqli_fetch_array($missions)) {
-        array_push($missionName, $row["name"]);
-        array_push($missionDesc, $row["description"]);
-        array_push($missionRubric, $row["rubric"]);
-    }
-    
-    for($i = 0; $i < count($missionName); $i++){
-        //insert this div element into the page, changing the description, rubric, title values based on each element in the respective array
-        echo " <div id='text'>
-                <h3>Title:$missionName[$i]</h3>                  
-                <br>
-                <br>
-                <h3>Description:<a>$missionDesc[$i]</a></h3>
-                <br>
-                <br>
-                <h3>Rubric:<a>$missionRubric[$i]</a></h3>
-                <br><br>
-                <h2><a>Accept</a></h2>
-                </div> ";
-    }
-        
-    }
-    
-    ?>
         <div id="name">
             <br>
         <br>
