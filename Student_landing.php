@@ -1,19 +1,4 @@
-Skip to content
-This repository
-Search
-Pull requests
-Issues
-Gist
- @rsgc-molloy-c
- Unwatch 3
-  Star 0
- Fork 0 rsgc-wrana-m/SSAS
- Code  Issues 0  Pull requests 0  Wiki  Pulse  Graphs
-Tree: 540b9eff9c Find file Copy pathSSAS/Student_landing.php
-540b9ef  41 minutes ago
-@rsgc-molloy-c rsgc-molloy-c Fixed #84
-1 contributor
-RawBlameHistory     339 lines (213 sloc)  8.53 KB
+
     <?php
     
     //Creating connection parameters for database, then connecting
