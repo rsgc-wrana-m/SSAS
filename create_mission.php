@@ -14,7 +14,8 @@
             $db = "mrgogor3_SSAS";
             $port = 3306;
             $connection = mysqli_connect($host, $user, $pass, $db, $port) or die(mysql_error());
-        
+            
+            //tfw u insert
             
             //get the four pieces of information, which the user entered
             $provided_name = htmlspecialchars(trim($_POST['missionName']));

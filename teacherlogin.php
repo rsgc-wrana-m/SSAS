@@ -90,7 +90,7 @@ if(isset($_POST['submit'])){
                     <h2 class="errormessage"><?php echo $message['db_error']; echo "<br>"; echo $message['no_user']; echo "<br>"; echo $message['wrong_pass']; echo "<br>";?></h2>
                     <label class="inputDesc">Username:</label> <input type="text" name="uname" value="<?php echo $_POST['uname'] ?>"> <br> <br>
                     <label class="inputDesc">Password:</label> <input type="password" name="password" value=""> <br> <br> <br>
-                    <input  class="button" type="submit" name="submit" value="Submit"> <br>
+                    <input  class="button" type="submit" name="submit" id="phpbutton" value="Submit"> <br>
                     <a href="forgot.php">Forgot your password? </a> <br>
                 </form>
             </div>
