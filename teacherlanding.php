@@ -1,10 +1,107 @@
     <?php
-        session_start();
-        if(isset($_SESSION['name'])){
-            $email = $_SESSION['name'];
-        }else{
-            header('Location: teacherlogin.php'); 
+    //Creating connection parameters for database, then connecting
+    $host = "209.236.71.62";
+    $user = "mrgogor3_SSASUSR";
+    $pass = "price498)focal";
+    $db = "mrgogor3_SSAS";
+    $port = 3306;
+    $connection = mysqli_connect($host, $user, $pass, $db, $port) or die(mysql_error());
+    
+    session_start();
+    if(isset($_SESSION['name'])){
+        $email = $_SESSION['name'];
+        
+    $getClasses = "select * from Classes;";
+    $classes = mysqli_query($connection, $getClasses);
+        
+    $classNames = array();
+    $classIDs = array();
+    while ($row = mysqli_fetch_array($classes)) {
+    array_push($classNames, $row["classname"]);
+    array_push($classIDs, $row["id"]);
+    }
+    
+    
+    
+    $classNameList = array();
+    
+    for($i = 0; $i < count($classNames); $i++){
+    
+    $classNameHTML = "<form class='Link' action='".$_SERVER['PHP_SELF']."' method='POST'>
+                    <input type='hidden' name='classid' value='".$classIDs[$i]."'>
+                    <input type='submit' name='classSubmit' class='butn' value='".$classNames[$i]."'>
+                    </form> <br><br>";
+    
+    array_push($classNameList, $classNameHTML); 
+    }
+    
+        
+    }else{
+        header('Location: teacherlogin.php'); 
+    }
+    
+    if(isset($_POST['classSubmit'])){
+       $classID = htmlspecialchars(trim($_POST['classid']));
+       
+        $getStudents = "select * from student where Classes_id=".$classID.";";
+        $students = mysqli_query($connection, $getStudents);
+            
+
+        //Creating three arrays, for each piece of important information needed from the student table within the database
+        $id = array();
+        $firstNames = array();
+        $lastNames = array();
+    
+        //Loop through each row of the result table, extracting useful information as needed, for example: extracting the student id from each row, and placing it into a seperate array
+        while ($row = mysqli_fetch_array($students)) {
+            
+            array_push($id, $row["id"]);
+            array_push($firstNames,$row["firstname"]);
+            array_push($lastNames,$row["lastname"]);
+            
+            
         }
+        
+        $students = array();
+        
+           for ($i = 0; $i < count($id); $i++){
+               
+            //getting a list of the currently active missions, for which the currently selected student is undertaking
+            $getActiveMission = "select * from acceptedmission where student_id=$id[$i]";
+            $activeMission = mysqli_query($connection, $getActiveMission);
+            
+            //If there are no active missions, with this student's id, then state that the student has no active missions
+            if($activeMission->num_rows == 0){
+                $currentMission = "No Mission";
+            }else{
+                //If the student is currently undertaking a mission, get the id of that mission, go to the mission list table, and retreive the name of said mission
+                $activeMissionRow = mysqli_fetch_array($activeMission);
+                $activeMissionID = $activeMissionRow["mission_id"];
+                $getMissionName = "select * from mission where id=$activeMissionID";
+                $missionName = mysqli_query($connection, $getMissionName);
+                $missionNameRow = mysqli_fetch_array($missionName);
+                $currentMission = $missionNameRow["name"];
+            }
+            
+            
+            //based on the information collected above, create a div entry that represents the student in the current position in the array
+            $studentHTML =  "<div class='aStudent' id='$id[$i]'> <span class='studentName'>$firstNames[$i] $lastNames[$i] - </span><span class='missionStatus'>$currentMission</span><span class='acceptMission'> A </span></div>";
+            
+            array_push($students, $studentHTML);
+            
+        }
+       
+    }
+    
+        function compareValue($array,$value) {
+        for ($i = 0; $i < count($array); $i++) {
+          if($array[$i] == $value) {
+              return true;
+          }
+        }
+    }   
+    
+    
     ?>
 <!DOCTYPE html>
 <html>
@@ -63,21 +160,6 @@
         
     </style>
     
-    <script>
-    function ENG4U1() {
-        window.alert("ENG4U-1");
-    }
-    
-        function ENG4U2() {
-        window.alert("ENG4U-2");
-    }
-    
-        function ENG4U3() {
-        window.alert("ENG4U-3");
-    }
-
-    </script>
-    
     <body>
         <div>
             <div id="left">
@@ -86,17 +168,7 @@
                 <br><br><br>Paul Darvasi<br><br>
             </h1>
             
-            <h3 class="Link" onClick="ENG4U1()">
-                ENG4U-1 <br><br>
-            </h3>
-            
-            <h3 class="Link" onClick="ENG4U2()">
-                ENG4U-2 <br><br>
-            </h3>
-            
-            <h3 class="Link" onClick="ENG4U3()">
-                ENG4U-3 <br><br>
-            </h3>
+            <?php foreach($classNameList as $className){echo $className;}?>
             
             <h3 class="Link">
                 <a href="create_mission.php">Create Mission</a> <br><br>
@@ -106,69 +178,7 @@
         
             <div id="right">
             
-            <?php 
-            //Creating connection parameters for database, then connecting
-            $host = "209.236.71.62";
-            $user = "mrgogor3_SSASUSR";
-            $pass = "price498)focal";
-            $db = "mrgogor3_SSAS";
-            $port = 3306;
-            $connection = mysqli_connect($host, $user, $pass, $db, $port) or die(mysql_error());
-            
-            $getStudents = "select * from student";
-            $students = mysqli_query($connection, $getStudents);
-            
-
-            //Creating three arrays, for each piece of important information needed from the student table within the database
-            $id = array();
-            $firstNames = array();
-            $lastNames = array();
-            
-            //Loop through each row of the result table, extracting useful information as needed, for example: extracting the student id from each row, and placing it into a seperate array
-            while ($row = mysqli_fetch_array($students)) {
-        
-                array_push($id, $row["id"]);
-                array_push($firstNames,$row["firstname"]);
-                array_push($lastNames,$row["lastname"]);
-                
-                
-            }
-            //iterating through each student in the student table, and echoing html code
-            for ($i = 0; $i < count($id); $i++){
-                
-                //getting a list of the currently active missions, for which the currently selected student is undertaking
-                $getActiveMission = "select * from acceptedmission where student_id=$id[$i]";
-                $activeMission = mysqli_query($connection, $getActiveMission);
-                
-                //If there are no active missions, with this student's id, then state that the student has no active missions
-                if($activeMission->num_rows == 0){
-                    $currentMission = "No Mission";
-                }else{
-                    //If the student is currently undertaking a mission, get the id of that mission, go to the mission list table, and retreive the name of said mission
-                    $activeMissionRow = mysqli_fetch_array($activeMission);
-                    $activeMissionID = $activeMissionRow["mission_id"];
-                    $getMissionName = "select * from mission where id=$activeMissionID";
-                    $missionName = mysqli_query($connection, $getMissionName);
-                    $missionNameRow = mysqli_fetch_array($missionName);
-                    $currentMission = $missionNameRow["name"];
-                }
-                
-                
-                //based on the information collected above, create a div entry that represents the student in the current position in the array
-                echo "<div class='aStudent' id='$id[$i]'> <span class='studentName'>$firstNames[$i] $lastNames[$i] - </span><span class='missionStatus'>$currentMission</span><span class='acceptMission'> A </span></div>";
-                
-            }
-            
-            
-            function compareValue($array,$value) {
-    for ($i = 0; $i < count($array); $i++) {
-      if($array[$i] == $value) {
-          return true;
-          echo "true";
-      }
-    }
-}
-            ?>
+            <?php if(isset($_POST['classSubmit']))foreach($students as $student)echo $student;?>
             
             </div>
         
