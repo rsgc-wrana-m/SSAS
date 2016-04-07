@@ -28,8 +28,8 @@
     for($i = 0; $i < count($classNames); $i++){
     
     $classNameHTML = "<form class='Link' action='".$_SERVER['PHP_SELF']."' method='POST'>
-                    <input type='hidden' name='classid' value='".$classIDs[$i]."'>
-                    <input type='submit' name='classSubmit' class='butn' value='".$classNames[$i]."'>
+                    <input type='hidden'  name='classid' value='".$classIDs[$i]."'>
+                    <input type='submit' id='phpbutton' name='classSubmit' class='butn' value='".$classNames[$i]."'>
                     </form> <br><br>";
     
     array_push($classNameList, $classNameHTML); 
@@ -111,6 +111,7 @@
     <style>
         body{
             margin:0;
+              font-family: 'Raleway', sans-serif;
         }
         #left{
            width: 25%;
@@ -158,6 +159,17 @@
             color:green;
         }
         
+         #phpbutton{
+            -webkit-border-radius: 8;
+            -moz-border-radius: 8;
+            border-radius: 8px;
+            color: #ffffff !important;
+            background:rgb(21,119,204) ;
+            padding: 9px 20px 10px 20px;
+            text-decoration: none;
+            border-style: hidden;
+        }
+        
     </style>
     
     <body>
@@ -171,7 +183,7 @@
             <?php foreach($classNameList as $className){echo $className;}?>
             
             <h3 class="Link">
-                <a href="create_mission.php">Create Mission</a> <br><br>
+                <a href="create_mission.php" id='phpbutton'>Create Mission</a> <br><br>
             </h3>
             
             </div>
