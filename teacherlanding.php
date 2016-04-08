@@ -88,21 +88,35 @@
             
             
             //based on the information collected above, create a div entry that represents the student in the current position in the array
-            $studentHTML =  "<div class='aStudent' id='$id[$i]'> <span class='studentName'>$firstNames[$i] $lastNames[$i] - </span><span class='missionStatus'>$currentMission</span><span class='acceptMission'> A </span></div>";
+            $studentHTML =  "<form class='aStudent' action='".$_SERVER['PHP_SELF']."' method='POST'> 
+            <span class='studentName'>$firstNames[$i] $lastNames[$i] - </span>
+            <span class='missionStatus'>$currentMission</span>
+            <input type='hidden' name='studentID' value='".$id[$i]."'>
+            <input class='acceptMission' type='submit' name='completeMission' value='A'>
+            </form>";
             
             array_push($students, $studentHTML);
             
+            
         }
        
-    }
-    
-        function compareValue($array,$value) {
+    function compareValue($array,$value) {
         for ($i = 0; $i < count($array); $i++) {
           if($array[$i] == $value) {
               return true;
           }
         }
-    }   
+    } 
+    
+    }
+    
+    if(isset($_POST['completeMission'])){
+        $studentID = htmlspecialchars(trim($_POST['studentID']));
+        
+        echo $studentID;
+    }
+    
+     if(isset($_POST['classSubmit'])){}
     
     
     ?>
@@ -156,7 +170,7 @@
         
         .acceptMission{
             float:right;
-            padding-right:50px;
+            padding-right:200px;
             font-weight:900;
             font-size: 1.5em;
             color:green;
@@ -190,11 +204,11 @@
             </h3>
 
             <h3 class="Link">
-                <a href="create_mission.php" id='phpbutton'>Create Mission</a> <br><br>
+                <a href="create_class.php" id='phpbutton'>Create Class Group</a> <br><br>
             </h3>
             
             <h3 class="Link">
-                <a href="create_mission.php" id='phpbutton'>Create Mission</a> <br><br>
+                <a href="create_missiontype.php" id='phpbutton'>Create Mission Type</a> <br><br>
             </h3>
             
             </div>

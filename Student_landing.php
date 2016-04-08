@@ -106,7 +106,7 @@
         if($alreadyAccepted){
             echo "mission already accepted";
         }else{
-            $addMission = "insert into acceptedmission(id,mission_id,student_id) values(0,".$missionID.",".$userID.");";
+            $addMission = "insert into acceptedmission(id,mission_id,student_id,acceptTime) values(0,".$missionID.",".$userID.",".time().");";
             
             if ($connection->query($addMission) === TRUE) {
             echo "mission accepted";
@@ -116,6 +116,14 @@
         }
         
     }
+    
+    function compareValue($array,$value) {
+        for ($i = 0; $i < count($array); $i++) {
+          if($array[$i] == $value) {
+              return true;
+          }
+        }
+    }  
     
     
 ?>

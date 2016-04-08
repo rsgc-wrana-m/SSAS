@@ -17,6 +17,92 @@
         header('Location: index.html'); 
     }
     
+    if(isset($_POST['submit'])){
+        
+        $provided_name = htmlspecialchars(trim($_POST['missionName']));
+        $provided_cat = htmlspecialchars(trim($_POST['missionCat']));
+        $provided_desc = htmlspecialchars(trim($_POST['missionDesc']));
+        $provided_rubric = htmlspecialchars(trim($_POST['missionRubric']));
+        $provided_coin = htmlspecialchars(trim($_POST['coinValue']));
+        $provided_pill = htmlspecialchars(trim($_POST['pillValue']));
+        $provided_envelope = htmlspecialchars(trim($_POST['envelopeValue']));
+        //$provided_time = htmlspecialchars(trim($_POST['completionTime']));
+        
+        $getMissions = "select * from mission";
+        $Missions = mysqli_query($connection, $getMissions);
+        $missionNames = array();
+        while ($row = mysqli_fetch_array($Missions)) {
+        array_push($missionNames, $row["name"]);
+        }
+        
+        $getMissionCats = "select * from missiontype";
+        $MissionCats = mysqli_query($connection, $getMissionCats);
+        $missionCatNames = array();
+        while ($row = mysqli_fetch_array($MissionCats)) {
+        array_push($missionCatNames, $row["Type"]);
+        }
+        
+        
+        if(compareValue($missionNames,$provided_name)){
+            $message['name'] = "A mission with this name already exists";
+        }
+        
+        if(compareValue($missionCatNames,$provided_cat)){
+            $getTypeID = "select * from missiontype where Type = '".$provided_cat."';";
+            $TypeID = mysqli_query($connection, $getTypeID);
+            $TypeID = mysqli_fetch_array($TypeID)['id'];
+        }else {
+            $message['type'] = "A mission type with this name does not exist";
+        }
+        
+        if(empty($provided_desc)){
+            $message['desc'] = "No Description Provided";
+        }
+        
+        if(empty($provided_rubric)){
+            $message['rubric'] = "No Rubric Provided";
+        }
+        
+        if(empty($provided_coin)){
+            $message['coins'] = "No Coin Value";
+        }
+        
+        if(empty($provided_pill)){
+            $message['pills'] = "No Pill Value";
+        }
+        
+        if(empty($provided_envelope)){
+            $message['envelopes'] = "No Envelope Value";
+        }
+        
+        /*if(empty($provided_time)){
+            $message['time'] = "No Completion Time";
+        }*/
+        
+        
+        if(!isset($message)){
+            $mission = "insert into mission(id,missiontype_id,name,description,rubric,coinValue,pillValue,envelopeValue) 
+            values(0,".$TypeID.",'".$provided_name."','".$provided_desc."','".$provided_rubric."',
+            ".$provided_coin.",".$provided_pill.",".$provided_envelope.");";
+            
+            if ($connection->query($mission) === TRUE) {
+            echo "mission created successfully";
+            }else {
+            echo "Error: " . $mission . "<br>" . $connection->error;
+            }
+            
+        }
+        
+    }
+
+    function compareValue($array,$value) {
+        for ($i = 0; $i < count($array); $i++) {
+          if($array[$i] == $value) {
+              return true;
+          }
+        }
+    } 
+    
     ?>
 <!DOCTYPE html>
 <html>
@@ -47,31 +133,21 @@
             color:blue;
         }
         
-        .aStudent{
-            padding-top: 30px;
-            padding-bottom: 30px;
-            width:100%;
+        form{
+            margin:auto;
+            width:80%;
+            text-align: left;
+            position:absolute;
+            top:25%;
+            right:0;
+            left:0;
         }
-        
-        .studentName{
-            float:left;
-            padding-left:30px;
-            font-size:1.5em;
-            font-weight:700;
-        }
-        
-        .missionStatus{
-            padding-left:10px;
-            font-size:1.5em;
-            font-weight:700;
-        }
-        
-        .acceptMission{
+        input{
             float:right;
-            padding-right:50px;
-            font-weight:900;
             font-size: 1.5em;
-            color:green;
+        }
+        label{
+            font-size: 1.5em;
         }
         
          #phpbutton{
@@ -115,16 +191,28 @@
             </h3>
 
             <h3 class="Link">
-                <a href="create_mission.php" id='phpbutton'>Create Class Group</a> <br><br>
+                <a href="create_class.php" id='phpbutton'>Create Class Group</a> <br><br>
             </h3>
             
             <h3 class="Link">
-                <a href="create_mission.php" id='phpbutton'>Create Mission Type</a> <br><br>
+                <a href="create_missiontype.php" id='phpbutton'>Create Mission Type</a> <br><br>
             </h3>
             
             </div>
         
             <div id="right">
+            
+            <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post">
+                <label class="inputDesc">Mission Name:</label><input type="text" name="missionName" value="<?php echo $_POST['missionName'] ?>"><span class="errormessage"><?php echo $message['name']; ?></span> <br><br>
+                <label class="inputDesc">Mission category:</label><input type="text" name="missionCat" value="<?php echo $_POST['missionCat'] ?>"><span class="errormessage"><?php echo $message['type']; ?></span> <br><br>
+                <label class="inputDesc">Mission Description:</label><input type="text" name="missionDesc" value="<?php echo $_POST['missionDesc'] ?>"><span class="errormessage"><?php echo $message['desc']; ?></span><br><br>
+                <label class="inputDesc">Mission Rubric (link):</label><input type="text" name="missionRubric" value="<?php echo $_POST['missionRubric'] ?>"><span class="errormessage"><?php echo $message['rubric']; ?></span> <br><br>
+                <label class="inputDesc">Coin Value of Mission:</label><input type="text" name="coinValue" value="<?php echo $_POST['coinValue'] ?>"><span class="errormessage"><?php echo $message['coins']; ?></span> <br><br>
+                <label class="inputDesc">Pill Value of Mission:</label><input type="text" name="pillValue" value="<?php echo $_POST['pillValue'] ?>"><span class="errormessage"><?php echo $message['pills']; ?></span> <br><br>
+                <label class="inputDesc">Envelope Value of Mission:</label><input type="text" name="envelopeValue" value="<?php echo $_POST['envelopeValue'] ?>"><span class="errormessage"><?php echo $message['envelopes']; ?></span> <br><br>
+                <!--<label class="inputDesc">Time to Complete Mission (Hours):</label><input type="text" name="completionTime" value="<?php echo $_POST['completionTime'] ?>"><span class="errormessage"><?php echo $message['time']; ?></span> <br><br>-->
+                <input  class="button" type="submit" name="submit" value="Submit">
+            </form>
             
             
             </div>
