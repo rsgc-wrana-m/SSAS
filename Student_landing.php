@@ -1,3 +1,4 @@
+
     <?php
     
     //Creating connection parameters for database, then connecting
@@ -75,10 +76,10 @@
         for($i = 0; $i < count($missionNames); $i++){
             $mission="<form id='text' action='".$_SERVER['PHP_SELF']."' method='POST'>
                 <h3>Title: $missionNames[$i]</h3><br>
-                <h3>Description:<a href='$missionDescs[$i]'>$missionDescs[$i]</a></h3><br>
-                <h3>Rubric:<a href='$missionRubrics[$i]'>$missionRubrics[$i]</a></h3><br>
+                <h3>Description:<a href='$missionDescs[$i]'>$missionDescs[$i]</a></h3>
+                <h3>Rubric:<a href='$missionRubrics[$i]'>$missionRubrics[$i]</a></h3>
                 <input type='hidden' name='missionID' value='".$missionIDs[$i]."'>
-                <input type='submit' name='acceptMission' value='Accept'>
+                <input type='submit' name='acceptMission' id='phpbutton' value='Accept'>
                 </form>";
                 
             array_push($avaliableMissions, $mission);
@@ -96,7 +97,6 @@
         
         $getUserMissions = "select * from acceptedmission where student_id=".$userID.";";
         $UserMission = mysqli_query($connection, $getUserMissions);
-
         
         if($UserMission->num_rows === 0)$alreadyAccepted = false;
         else $alreadyAccepted = true;
@@ -130,6 +130,7 @@
     
 
 <!DOCTYPE html>
+
 <html>
 
     <link href='https://fonts.googleapis.com/css?family=Raleway:100,200,300,400,500,600,700,800,900' rel='stylesheet' type='text/css'>
@@ -153,8 +154,7 @@
         h3{
             
             font-family: 'Raleway', sans-serif;
-                      font-weight: 520;
-
+                      font-weight: 500;
            
             font-size: 2em;
             margin-left: 20px;
@@ -168,7 +168,7 @@
             padding-right: 10px;
             font-size: 1em;
             text-decoration: none;
-            text-transform: uppercase;
+           
             color:rgb(21,119,204);
         }
         a:visited{
@@ -191,6 +191,29 @@
         }
         
         
+       #phpbutton{
+            -webkit-border-radius: 8;
+            -moz-border-radius: 8;
+            border-radius: 8px;
+            color: #ffffff !important;
+            background:rgb(21,119,204) ;
+            padding: 9px 20px 10px 20px;
+            text-decoration: none;
+            border-style: hidden;
+           font-size:1em;
+              margin-left: 20px;
+              margin-bottom:5px;
+        }
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
         
         .butn {
   font-family: 'Raleway', sans-serif;
@@ -209,7 +232,6 @@
             height:100px;
   text-decoration: none;
 }
-
   
         
         
