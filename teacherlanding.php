@@ -185,6 +185,14 @@
             <h3 class="Link">
                 <a href="create_mission.php" id='phpbutton'>Create Mission</a> <br><br>
             </h3>
+
+            <h3 class="Link">
+                <a href="create_mission.php" id='phpbutton'>Create Mission</a> <br><br>
+            </h3>
+            
+            <h3 class="Link">
+                <a href="create_mission.php" id='phpbutton'>Create Mission</a> <br><br>
+            </h3>
             
             </div>
         
