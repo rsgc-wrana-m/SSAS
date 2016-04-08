@@ -8,8 +8,8 @@
     $connection = mysqli_connect($host, $user, $pass, $db, $port) or die(mysql_error());
     
     session_start();
-    if(isset($_SESSION['name'])){
-        $email = $_SESSION['name'];
+    if(isset($_SESSION['teacher'])){
+        $username = $_SESSION['teacher'];
         
     $getClasses = "select * from Classes;";
     $classes = mysqli_query($connection, $getClasses);
@@ -36,8 +36,11 @@
     }
     
         
-    }else{
-        header('Location: teacherlogin.php'); 
+    }else if(isset($_SESSION['student'])){
+        header('Location: studentlogin.php');
+    }
+    else{
+        header('Location: index.html'); 
     }
     
     if(isset($_POST['classSubmit'])){

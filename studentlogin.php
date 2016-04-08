@@ -1,8 +1,8 @@
 <?php 
 session_start();
 //If user is already logged in, redirect them to the landing page
-if(isset($_SESSION['name'])){
-    header('Location: landed.php'); 
+if(isset($_SESSION['student'])){
+    header('Location: Student_landing.php'); 
 }
 //Checks button presss
 if(isset($_POST['submit'])){

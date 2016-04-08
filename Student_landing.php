@@ -9,8 +9,8 @@
     $connection = mysqli_connect($host, $user, $pass, $db, $port) or die(mysql_error());
     
     session_start();
-    if(isset($_SESSION['name'])){
-    $email = $_SESSION['name'];
+    if(isset($_SESSION['student'])){
+    $email = $_SESSION['student'];
     
     $getSubjects = "select * from missiontype";
     $subjects = mysqli_query($connection, $getSubjects);
@@ -34,8 +34,10 @@
         
         array_push($buttonArray, $buttonHTML);
     }
+    }else if(isset($_SESSION['teacher'])){
+        header('Location: teacherlogin.php');
     }else{
-        header('Location: studentlogin.php'); 
+        header('Location: index.html'); 
     }
     
     if(isset($_POST['subjectSubmit'])){

@@ -8,11 +8,13 @@
     $connection = mysqli_connect($host, $user, $pass, $db, $port) or die(mysql_error());
     
     session_start();
-    if(isset($_SESSION['name'])){
-        $email = $_SESSION['name'];
+    if(isset($_SESSION['teacher'])){
+        $username = $_SESSION['teacher'];
         
+    }else if(isset($_SESSION['student'])){
+        header('Location: studentlogin.php');
     }else{
-        header('Location: teacherlogin.php'); 
+        header('Location: index.html'); 
     }
     
     ?>
