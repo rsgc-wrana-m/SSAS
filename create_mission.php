@@ -26,7 +26,7 @@
         $provided_coin = htmlspecialchars(trim($_POST['coinValue']));
         $provided_pill = htmlspecialchars(trim($_POST['pillValue']));
         $provided_envelope = htmlspecialchars(trim($_POST['envelopeValue']));
-        //$provided_time = htmlspecialchars(trim($_POST['completionTime']));
+        $provided_time = htmlspecialchars(trim($_POST['completionTime']));
         
         $getMissions = "select * from mission";
         $Missions = mysqli_query($connection, $getMissions);
@@ -75,15 +75,15 @@
             $message['envelopes'] = "No Envelope Value";
         }
         
-        /*if(empty($provided_time)){
+        if(empty($provided_time)){
             $message['time'] = "No Completion Time";
-        }*/
+        }
         
         
         if(!isset($message)){
-            $mission = "insert into mission(id,missiontype_id,name,description,rubric,coinValue,pillValue,envelopeValue) 
+            $mission = "insert into mission(id,missiontype_id,name,description,rubric,coinValue,pillValue,envelopeValue,completionTime) 
             values(0,".$TypeID.",'".$provided_name."','".$provided_desc."','".$provided_rubric."',
-            ".$provided_coin.",".$provided_pill.",".$provided_envelope.");";
+            ".$provided_coin.",".$provided_pill.",".$provided_envelope.",".$provided_time.");";
             
             if ($connection->query($mission) === TRUE) {
             echo "mission created successfully";
@@ -210,7 +210,7 @@
                 <label class="inputDesc">Coin Value of Mission:</label><input type="text" name="coinValue" value="<?php echo $_POST['coinValue'] ?>"><span class="errormessage"><?php echo $message['coins']; ?></span> <br><br>
                 <label class="inputDesc">Pill Value of Mission:</label><input type="text" name="pillValue" value="<?php echo $_POST['pillValue'] ?>"><span class="errormessage"><?php echo $message['pills']; ?></span> <br><br>
                 <label class="inputDesc">Envelope Value of Mission:</label><input type="text" name="envelopeValue" value="<?php echo $_POST['envelopeValue'] ?>"><span class="errormessage"><?php echo $message['envelopes']; ?></span> <br><br>
-                <!--<label class="inputDesc">Time to Complete Mission (Hours):</label><input type="text" name="completionTime" value="<?php echo $_POST['completionTime'] ?>"><span class="errormessage"><?php echo $message['time']; ?></span> <br><br>-->
+                <label class="inputDesc">Time to Complete Mission (Hours):</label><input type="text" name="completionTime" value="<?php echo $_POST['completionTime'] ?>"><span class="errormessage"><?php echo $message['time']; ?></span> <br><br>
                 <input  class="button" type="submit" name="submit" value="Submit">
             </form>
             

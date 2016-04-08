@@ -80,10 +80,34 @@
                 //If the student is currently undertaking a mission, get the id of that mission, go to the mission list table, and retreive the name of said mission
                 $activeMissionRow = mysqli_fetch_array($activeMission);
                 $activeMissionID = $activeMissionRow["mission_id"];
+                
                 $getMissionName = "select * from mission where id=$activeMissionID";
                 $missionName = mysqli_query($connection, $getMissionName);
                 $missionNameRow = mysqli_fetch_array($missionName);
                 $currentMission = $missionNameRow["name"];
+                
+                $acceptedTime = $activeMissionRow["acceptTime"];
+                $missionTime = $missionNameRow['completionTIme'];
+                $completionTime = $missionTime*60*60;
+                
+                
+                $timeDue = $acceptedTime + $completionTime;
+                $currentTime = time();
+                $seconds = $timeDue - $currentTime;
+                
+                if($seconds < 0){
+                    $time = "Past Due";
+                }
+                else{
+                    $hours = floor($seconds / 3600);
+                    $mins = floor(($seconds - $hours*3600) / 60);
+                    $s = $seconds - ($hours*3600 + $mins*60);   
+
+                    $mins = ($mins<10?"0".$mins:"".$mins);
+                    $s = ($s<10?"0".$s:"".$s); 
+
+                    $time = ($hours>0?$hours.":":"").$mins.":".$s;
+                }
             }
             
             
@@ -91,6 +115,7 @@
             $studentHTML =  "<form class='aStudent' action='".$_SERVER['PHP_SELF']."' method='POST'> 
             <span class='studentName'>$firstNames[$i] $lastNames[$i] - </span>
             <span class='missionStatus'>$currentMission</span>
+            <span class='timeStatus'>$time</span>
             <input type='hidden' name='studentID' value='".$id[$i]."'>
             <input class='acceptMission' type='submit' name='completeMission' value='A'>
             </form>";
@@ -111,12 +136,11 @@
     }
     
     if(isset($_POST['completeMission'])){
-        $studentID = htmlspecialchars(trim($_POST['studentID']));
         
+        
+        $studentID = htmlspecialchars(trim($_POST['studentID']));
         echo $studentID;
     }
-    
-     if(isset($_POST['classSubmit'])){}
     
     
     ?>
@@ -166,6 +190,12 @@
             padding-left:10px;
             font-size:1.5em;
             font-weight:700;
+        }
+        
+        .timeStatus{
+            padding-left:10px;
+            font-size:1.5em;
+            font-family: "Courier New", Courier, monospace;
         }
         
         .acceptMission{
