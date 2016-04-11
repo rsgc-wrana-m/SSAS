@@ -151,7 +151,7 @@
             
             <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post">
                 <label class="inputDesc">Mission Category:</label><input type="text" name="categoryName" value="<?php echo $_POST['categoryName'] ?>"><span class="errormessage"><?php echo $message; ?></span> <br><br>
-                <input  class="button" type="submit" name="submit" value="Submit">
+                <input  class="button" type="submit" name="submit" value="Submit" id="phpbutton">
             </form>
             
             </div>

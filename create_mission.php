@@ -211,7 +211,7 @@
                 <label class="inputDesc">Pill Value of Mission:</label><input type="text" name="pillValue" value="<?php echo $_POST['pillValue'] ?>"><span class="errormessage"><?php echo $message['pills']; ?></span> <br><br>
                 <label class="inputDesc">Envelope Value of Mission:</label><input type="text" name="envelopeValue" value="<?php echo $_POST['envelopeValue'] ?>"><span class="errormessage"><?php echo $message['envelopes']; ?></span> <br><br>
                 <label class="inputDesc">Time to Complete Mission (Hours):</label><input type="text" name="completionTime" value="<?php echo $_POST['completionTime'] ?>"><span class="errormessage"><?php echo $message['time']; ?></span> <br><br>
-                <input  class="button" type="submit" name="submit" value="Submit">
+                <input  class="button" type="submit" name="submit" value="Submit" id="phpbutton">
             </form>
             
             

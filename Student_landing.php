@@ -271,7 +271,9 @@
             text-align: left;
             display:flex;
             align-items: left;
-            height: 100px;
+            height: 70px;
+            padding-top:20px;
+            padding-left:35px;
             
         }
         #face{

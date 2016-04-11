@@ -151,7 +151,7 @@
             
             <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post">
                 <label class="inputDesc">Class Name:</label><input type="text" name="className" value="<?php echo $_POST['className'] ?>"><span class="errormessage"><?php echo $message; ?></span> <br><br>
-                <input  class="button" type="submit" name="submit" value="Submit">
+                <input  class="button" type="submit" name="submit" value="Submit" id="phpbutton">
             </form>
             
             </div>
