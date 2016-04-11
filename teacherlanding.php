@@ -294,6 +294,7 @@
             padding: 9px 20px 10px 20px;
             text-decoration: none;
             border-style: hidden;
+            
         }
         
     </style>
@@ -318,6 +319,7 @@
             
             <h3 class="Link">
                 <a href="create_missiontype.php" id='phpbutton'>Create Mission Type</a> <br><br>
+                <a href="signout.php" id='phpbutton'>Sign Out</a>
             </h3>
             
             </div>
