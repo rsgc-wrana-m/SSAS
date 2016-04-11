@@ -212,11 +212,26 @@
             text-decoration: none;
             border-style: hidden;
            font-size:1em;
-              margin-left: 20px;
+           
+            
               margin-bottom:5px;
+              
         }
         
-        
+        #phppbutton{
+            -webkit-border-radius: 8;
+            -moz-border-radius: 8;
+            border-radius: 8px;
+            color: #ffffff !important;
+            background:rgb(21,119,204) ;
+            padding: 9px 20px 10px 20px;
+            text-decoration: none;
+            border-style: hidden;
+           font-size:1em;
+           margin-left:-100px;
+            
+              margin-bottom:5px;  
+        }
         
         
         
@@ -341,13 +356,15 @@
                  <h3><?php echo $pills ?></h3> <br>
                        
              <img src="images/Pills.png" id="point">
-                 <h3><?php echo $envelopes ?></h3>
+                 <h3><?php echo $envelopes ?></h3><br>
+                 <a href="signout.php" id='phppbutton'>Sign Out</a>
         </div>
+        
          <div id="info">
              <div class="currency">
              
         </div>
-             
+              
             </div>      
               
                  
