@@ -13,6 +13,17 @@
     if(isset($_SESSION['student'])){
     $email = $_SESSION['student'];
     
+    $getStudent = "select * from student where email='$email';";
+    $student = mysqli_query($connection, $getStudent);
+    $studentRow = mysqli_fetch_array($student);
+    $coins = $studentRow['coins'];
+    $pills = $studentRow['pills'];
+    $envelopes = $studentRow['envelopes'];
+    $firstname = $studentRow['firstname'];
+    $lastname = $studentRow['lastname'];
+    
+    
+    
     $getSubjects = "select * from missiontype";
     $subjects = mysqli_query($connection, $getSubjects);
     
@@ -75,8 +86,8 @@
         
         for($i = 0; $i < count($missionNames); $i++){
             $mission="<form id='text' action='".$_SERVER['PHP_SELF']."' method='POST'>
-                <h3>Title: $missionNames[$i]</h3><br>
-                <h3>Description:<a href='$missionDescs[$i]'>$missionDescs[$i]</a></h3>
+                <h3>Title: $missionNames[$i]</h3>
+                <h3>Description:$missionDescs[$i]</h3>
                 <h3>Rubric:<a href='$missionRubrics[$i]'>$missionRubrics[$i]</a></h3>
                 <input type='hidden' name='missionID' value='".$missionIDs[$i]."'>
                 <input type='submit' name='acceptMission' id='phpbutton' value='Accept'>
@@ -318,17 +329,17 @@
         <div id="name">
             <br>
         <br>
-           <h2>Michael Wrana</h2>  
+           <h2><?php echo $firstname;echo "&nbsp;";echo $lastname;?></h2>  
             <img src="images/Coin.png" id="point">
                  
-                     <h3>500</h3><br>
+                     <h3><?php echo $coins ?></h3><br>
                  
                   
              <img src="images/Envelope.png" id="point">
-                 <h3>50</h3> <br>
+                 <h3><?php echo $pills ?></h3> <br>
                        
              <img src="images/Pills.png" id="point">
-                 <h3>5</h3>
+                 <h3><?php echo $envelopes ?></h3>
         </div>
          <div id="info">
              <div class="currency">

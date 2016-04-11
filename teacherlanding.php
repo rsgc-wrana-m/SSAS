@@ -76,7 +76,14 @@
             //If there are no active missions, with this student's id, then state that the student has no active missions
             if($activeMission->num_rows == 0){
                 $currentMission = "No Mission";
+                $time = "";
+                $acceptButton = "";
+                $failButton = "";
             }else{
+                
+                $acceptButton = "<input class='acceptMission' type='submit' name='completeMission' value='A'>";
+                $failButton = "<input class='failMission' type='submit' name='failMission' value='F'>";
+                
                 //If the student is currently undertaking a mission, get the id of that mission, go to the mission list table, and retreive the name of said mission
                 $activeMissionRow = mysqli_fetch_array($activeMission);
                 $activeMissionID = $activeMissionRow["mission_id"];
@@ -96,7 +103,21 @@
                 $seconds = $timeDue - $currentTime;
                 
                 if($seconds < 0){
-                    $time = "Past Due";
+                    $seconds = abs($seconds);
+                    
+                    
+                    $hours = floor($seconds / 3600);
+                    $mins = floor(($seconds - $hours*3600) / 60);
+                    $s = $seconds - ($hours*3600 + $mins*60);   
+
+                    $mins = ($mins<10?"0".$mins:"".$mins);
+                    $s = ($s<10?"0".$s:"".$s); 
+
+                    $time = ($hours>0?$hours.":":"").$mins.":".$s;
+                    
+                    $time = "Past Due by $time";
+                    
+                    
                 }
                 else{
                     $hours = floor($seconds / 3600);
@@ -117,7 +138,8 @@
             <span class='missionStatus'>$currentMission</span>
             <span class='timeStatus'>$time</span>
             <input type='hidden' name='studentID' value='".$id[$i]."'>
-            <input class='acceptMission' type='submit' name='completeMission' value='A'>
+            $acceptButton
+            $failButton
             </form>";
             
             array_push($students, $studentHTML);
@@ -137,9 +159,60 @@
     
     if(isset($_POST['completeMission'])){
         
-        
         $studentID = htmlspecialchars(trim($_POST['studentID']));
-        echo $studentID;
+        $getStudent = "select * from student where id=$studentID;";
+        $student = mysqli_query($connection, $getStudent);
+        $studentRow = mysqli_fetch_array($student);
+        $coins = $studentRow['coins'];
+        $pills = $studentRow['pills'];
+        $envelopes = $studentRow['envelopes'];
+        
+        
+        
+        $getMission = "select * from acceptedmission where student_id=$studentID;";
+        $mission = mysqli_query($connection, $getMission);
+        $missionID = mysqli_fetch_array($mission)['mission_id'];
+        $getMissionValues = "select * from mission where id=$missionID;";
+        $missionValues = mysqli_query($connection, $getMissionValues);
+        $missionValuesRow = mysqli_fetch_array($missionValues);
+        $coinValue = $missionValuesRow['coinValue'];
+        $pillValue = $missionValuesRow['pillValue'];
+        $envelopeValue = $missionValuesRow['envelopeValue'];
+        
+        
+        $totalCoins = $coins+$coinValue;
+        $totalPills = $pills+$pillValue;
+        $totalEnvelopes = $envelopes+$envelopeValue;
+        
+        
+        $addValues = "
+        UPDATE student 
+        SET coins=$totalCoins,pills=$totalPills,envelopes=$totalEnvelopes
+        WHERE id=$studentID;";
+        
+        $removeMission = "delete from acceptedmission where student_id=$studentID";
+        
+        if ($connection->query($addValues) === TRUE && $connection->query($removeMission) === TRUE) {
+            echo "Mission Accepted";
+        }else {
+            echo "Error: " . $addValues . "<br>" . $connection->error;
+            echo "Error: " . $removeMission . "<br>" . $connection->error;
+        }
+        
+    }
+    
+    if(isset($_POST['failMission'])){
+        $studentID = htmlspecialchars(trim($_POST['studentID']));
+        
+        $removeMission = "delete from acceptedmission where student_id=$studentID";
+        
+        
+        if ($connection->query($removeMission) === TRUE) {
+            echo "Mission Failed";
+        }else {
+            echo "Error: " . $removeMission . "<br>" . $connection->error;
+        }
+        
     }
     
     
@@ -200,10 +273,16 @@
         
         .acceptMission{
             float:right;
-            padding-right:200px;
             font-weight:900;
             font-size: 1.5em;
             color:green;
+        }
+        
+        .failMission{
+            float:right;
+            font-weight:900;
+            font-size: 1.5em;
+            color:red;
         }
         
          #phpbutton{
