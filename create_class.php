@@ -98,6 +98,8 @@
         }
         
          #phpbutton{
+             display:inline-block;
+             width:180px;
             -webkit-border-radius: 8;
             -moz-border-radius: 8;
             border-radius: 8px;
@@ -109,6 +111,8 @@
         }
         
         #activebutton{
+              display:inline-block;
+             width:180px;
             -webkit-border-radius: 8;
             -moz-border-radius: 8;
             border-radius: 8px;
@@ -143,8 +147,12 @@
             
             <h3 class="Link">
                 <a href="create_missiontype.php" id='phpbutton'>Create Mission Type</a> <br><br>
+                
             </h3>
-            
+            <h3 class="Link">
+               
+                 <a href="signout.php" id='phpbutton'>Sign Out</a>
+            </h3>
             </div>
         
             <div id="right">
