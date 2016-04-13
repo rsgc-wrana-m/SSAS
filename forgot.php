@@ -40,8 +40,7 @@ if(isset($_POST['submit'])){
         if ($connection->query($updatePass) === TRUE) {
         //Since the password was changed, send an email to the user containing the password in plain text
         
-        $content = "YOUR PASSWORD HAS BEEN RESET \n YOUR CURRENT PASSWORD IS :'" .$randomPassword."' \n IT IS HIGHLY RECCOMENDED YOU CHANGE YOUR PASSWORD AGAIN";
-        mail($provided_email,"Password Reset",$content);
+        $content = "YOUR PASSWORD HAS BEEN RESET <br> YOUR CURRENT PASSWORD IS : '<span id='courier'>".$randomPassword."</span>' <br> IT IS HIGHLY RECCOMENDED YOU CHANGE YOUR PASSWORD AGAIN";
         
             
         }else {
@@ -84,6 +83,16 @@ if(isset($_POST['submit'])){
             display:none;
             text-align: center;
         }
+        #result{
+            text-align:center;
+            font-size: 1.5em;
+        }
+        #courier{
+            text-align:center;
+            font-size: 1.3em;
+            font-weight:100;
+            font-family:"courier new";
+        }
     </style>
     
     
@@ -93,6 +102,9 @@ if(isset($_POST['submit'])){
                 <a href="index.html"><img src="images/sample.png" id="logo"></a>
             </div>
             <br><br><br>
+            
+            <?php if(isset($_POST['submit'])){echo "<h5 id='result'>$content</h5>";} ?>
+            
                 <form id="emailInput" action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post">
                     <h2><?php echo $message['no_user']?></h2>
                     <label class="inputDesc">Email associated with your account:</label> <input type="text" name="email" value="<?php echo $_POST['email'] ?>"> <br> <br> <br>

@@ -81,9 +81,9 @@
         
         
         if(!isset($message)){
-            $mission = "insert into mission(id,missiontype_id,name,description,rubric,coinValue,pillValue,envelopeValue,completionTime) 
+            $mission = "insert into mission(id,missiontype_id,name,description,rubric,coinValue,pillValue,envelopeValue,completionTime,chainmission_id,missiontier) 
             values(0,".$TypeID.",'".$provided_name."','".$provided_desc."','".$provided_rubric."',
-            ".$provided_coin.",".$provided_pill.",".$provided_envelope.",".$provided_time.");";
+            ".$provided_coin.",".$provided_pill.",".$provided_envelope.",".$provided_time.",NULL,NULL);";
             
             if ($connection->query($mission) === TRUE) {
             echo "mission created successfully";
