@@ -352,11 +352,13 @@
                      <h3><?php echo $coins ?></h3><br>
                  
                   
-             <img src="images/Envelope.png" id="point">
-                 <h3><?php echo $pills ?></h3> <br>
+           
                        
              <img src="images/Pills.png" id="point">
                  <h3><?php echo $envelopes ?></h3><br>
+                 
+                   <img src="images/Envelope.png" id="point">
+                 <h3><?php echo $pills ?></h3> <br>
                  <a href="signout.php" id='phppbutton'>Sign Out</a>
         </div>
         
