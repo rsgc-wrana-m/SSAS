@@ -47,6 +47,10 @@
             $message['name'] = "A mission with this name already exists";
         }
         
+        if(empty($provided_name)){
+            $message['name'] = "No name provided";
+        }
+        
         if(compareValue($missionCatNames,$provided_cat)){
             $getTypeID = "select * from missiontype where Type = '".$provided_cat."';";
             $TypeID = mysqli_query($connection, $getTypeID);

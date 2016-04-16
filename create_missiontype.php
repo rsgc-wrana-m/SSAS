@@ -30,6 +30,10 @@
             $message = "A mission cateogry with this name already exists";
         }
         
+        if(empty($provided_cat)){
+            $message = "No name provided";
+        }
+        
         if(!isset($message)){
             $addCategory = "insert into missiontype(id,Type) values(0,'".$provided_cat."');";
             

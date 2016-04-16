@@ -27,6 +27,8 @@
         $provided_pill = htmlspecialchars(trim($_POST['pillValue']));
         $provided_envelope = htmlspecialchars(trim($_POST['envelopeValue']));
         $provided_time = htmlspecialchars(trim($_POST['completionTime']));
+        $provided_chain = htmlspecialchars(trim($_POST['chainMission']));
+        $chain_tier = htmlspecialchars(trim($_POST['chainNumber']));
         
         $getMissions = "select * from mission";
         $Missions = mysqli_query($connection, $getMissions);
@@ -42,9 +44,20 @@
         array_push($missionCatNames, $row["Type"]);
         }
         
+        $getMissionChains = "select * from chainmission";
+        $missionChains = mysqli_query($connection, $getMissionChains);
+        $missionChainNames = array();
+        while ($row = mysqli_fetch_array($missionChains)) {
+        array_push($missionChainNames, $row["name"]);
+        }
+        
         
         if(compareValue($missionNames,$provided_name)){
             $message['name'] = "A mission with this name already exists";
+        }
+        
+        if(empty($provided_name)){
+            $message['name'] = "No name provided";
         }
         
         if(compareValue($missionCatNames,$provided_cat)){
@@ -79,11 +92,37 @@
             $message['time'] = "No Completion Time";
         }
         
+        if(compareValue($missionChainNames,$provided_chain)){
+            $getChainID = "select * from chainmission where name = '".$provided_chain."';";
+            $chainID = mysqli_query($connection, $getChainID);
+            $chainID2 = mysqli_fetch_array($chainID);
+            $chainID = $chainID2['id'];
+            $getMissions = "select * from mission where chainmission_id=$chainID";
+            $missions = mysqli_query($connection, $getMissions);
+            $missionChainTiers = array();
+            while ($row = mysqli_fetch_array($missions)) {
+            array_push($missionChainTiers, $row["missiontier"]);
+            }
+        }else {
+            $message['chain'] = "A chain mission with this name does not exist";
+        }
+        
+        if(empty($provided_chain)){
+            $message['chain'] = "Text Field empty";
+        }
+        
+        if(empty($chain_tier)){
+            $message['cnumber'] = "No Chain Tier Provided";
+        }
+        
+        if(compareValue($missionChainTiers,$chain_tier)){
+            $message['cnumber'] = "This Mission chain already has a tier $chain_tier mission";
+        }
         
         if(!isset($message)){
             $mission = "insert into mission(id,missiontype_id,name,description,rubric,coinValue,pillValue,envelopeValue,completionTime,chainmission_id,missiontier) 
             values(0,".$TypeID.",'".$provided_name."','".$provided_desc."','".$provided_rubric."',
-            ".$provided_coin.",".$provided_pill.",".$provided_envelope.",".$provided_time.",NULL,NULL);";
+            ".$provided_coin.",".$provided_pill.",".$provided_envelope.",".$provided_time.",$chainID,$chain_tier);";
             
             if ($connection->query($mission) === TRUE) {
             echo "mission created successfully";
@@ -219,7 +258,6 @@
             </div>
         
             <div id="right">
-            
             <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post">
                 <label class="inputDesc">Mission Name:</label><input type="text" name="missionName" value="<?php echo $_POST['missionName'] ?>"><span class="errormessage"><?php echo $message['name']; ?></span> <br><br>
                 <label class="inputDesc">Mission category:</label><input type="text" name="missionCat" value="<?php echo $_POST['missionCat'] ?>"><span class="errormessage"><?php echo $message['type']; ?></span> <br><br>
@@ -228,8 +266,9 @@
                 <label class="inputDesc">Pill Value of Mission:</label><input type="text" name="pillValue" value="<?php echo $_POST['pillValue'] ?>"><span class="errormessage"><?php echo $message['pills']; ?></span> <br><br>
                 <label class="inputDesc">Envelope Value of Mission:</label><input type="text" name="envelopeValue" value="<?php echo $_POST['envelopeValue'] ?>"><span class="errormessage"><?php echo $message['envelopes']; ?></span> <br><br>
                 <label class="inputDesc">Time to Complete Mission (Hours):</label><input type="text" name="completionTime" value="<?php echo $_POST['completionTime'] ?>"><span class="errormessage"><?php echo $message['time']; ?></span> <br><br>
-                <label class="inputDesc"id="description" >Mission Description:</label><input type="text" id="description" name="missionDesc" value="<?php echo $_POST['missionDesc'] ?>"><span class="errormessage"><?php echo $message['desc']; ?></span><br><br>
-               
+                <label class="inputDesc">Mission Description:</label><input type="text" id="description" name="missionDesc" value="<?php echo $_POST['missionDesc'] ?>"><span class="errormessage"><?php echo $message['desc']; ?></span><br><br>
+                <label class="inputDesc">Associated Chain Mission:</label><input type="text" name="chainMission" value="<?php echo $_POST['chainMission'] ?>"><span class="errormessage"><?php echo $message['chain']; ?></span><br><br>
+                <label class="inputDesc">Mission Number in Chain:</label><input type="text" name="chainNumber" value="<?php echo $_POST['chainNumber'] ?>"><span class="errormessage"><?php echo $message['cnumber']; ?></span><br><br>
                 <input  class="button" type="submit" name="submit" value="Submit" id="phpbutton">
             </form>
             
