@@ -250,6 +250,10 @@
                 <a href="chain_mission.php" id='activebutton'>Create Chain Mission</a> <br><br>
                  
             </h3>
+             <h3 class="Link">
+                <a href="create_chain.php" id='phpbutton'>Create Mission Chain</a> <br><br>
+                 
+            </h3>
             <h3 class="Link">
                
                  <a href="signout.php" id='phpbutton'>Sign Out</a>

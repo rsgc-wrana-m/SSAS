@@ -146,7 +146,7 @@
             </h3>
 
             <h3 class="Link">
-                <a href="create_class.php" id='activebutton'>Create Class Group</a> <br><br>
+                <a href="create_class.php" id='phpbutton'>Create Class Group</a> <br><br>
             </h3>
             
             <h3 class="Link">
@@ -158,9 +158,14 @@
                  
             </h3>
             <h3 class="Link">
+                <a href="create_chain.php" id='activebutton'>Create Mission Chain</a> <br><br>
+                 
+            </h3>
+            <h3 class="Link">
                
                  <a href="signout.php" id='phpbutton'>Sign Out</a>
             </h3>
+             
             </div>
         
             <div id="right">
