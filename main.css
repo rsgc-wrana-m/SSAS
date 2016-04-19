@@ -1,12 +1,17 @@
 body{
-            min-width: 1280px !important;
+           width: auto;
+max-width: 1000px;
+min-width: 1000px;
             margin:0;
             font-family: 'Raleway', sans-serif;
+            
         }
         #container{
             position:fixed;
             height:100%;
             width:100%;
+            max-width: 1200px;
+min-width: 1200px;
         }
         #leftSide, #rightSide{
             width:50%;
