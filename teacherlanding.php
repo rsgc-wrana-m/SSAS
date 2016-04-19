@@ -221,6 +221,7 @@
 <html>
     <link href='https://fonts.googleapis.com/css?family=Raleway:100,200,300,400,500,600,700,800,900' rel='stylesheet' type='text/css'>
     <link rel="icon" href="images/favicon.ico" type="image/gif" sizes="16x16">
+
     <title>RSGC SSAS</title>
     <style>
         body{
@@ -300,10 +301,17 @@
             
         }
         
+        
+          #container{
+            position:fixed;
+            height:100%;
+            width:100%;
+            min-width: 1280px;
+        }
     </style>
     
     <body>
-        <div>
+        <div id="container">
             <div id="left">
             
             <h1>

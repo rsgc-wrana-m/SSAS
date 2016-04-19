@@ -91,9 +91,11 @@
             
             if ($connection->query($mission) === TRUE) {
             echo "mission created successfully";
+            header("Location: teacherlanding.php");
             }else {
             echo "Error: " . $mission . "<br>" . $connection->error;
             }
+            
             
         }
         
@@ -112,6 +114,7 @@
 <html>
     <link href='https://fonts.googleapis.com/css?family=Raleway:100,200,300,400,500,600,700,800,900' rel='stylesheet' type='text/css'>
     <link rel="icon" href="images/favicon.ico" type="image/gif" sizes="16x16">
+    <link rel="stylesheet" type="text/css" href="main.css">
     <title>RSGC SSAS</title>
     <style>
         body{
@@ -188,7 +191,7 @@
     </style>
     
     <body>
-        <div>
+        <div id="container">
             <div id="left">
             
             <h1>
