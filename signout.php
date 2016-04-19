@@ -14,6 +14,7 @@
     <?php
     session_start();
     session_destroy();
+    header('Location: index.html'); 
     ?>
     
     <h1>Logged Out</h1>

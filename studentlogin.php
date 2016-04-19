@@ -84,7 +84,7 @@ if(isset($_POST['submit'])){
         }
     </style>
     
-    <body>
+    <body style="body{min-width:1280px;}">
         <div id="container">
             <div id="top">
                 <a href="index.html"><img src="images/sample.png" id="logo"></a>

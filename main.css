@@ -1,4 +1,5 @@
 body{
+            min-width: 1280px !important;
             margin:0;
             font-family: 'Raleway', sans-serif;
         }
@@ -56,7 +57,7 @@ input{
         }
 
         .btn:hover {
-            background: #3cb0fd !imprtant;
+            background: #3cb0fd !important;
             background-image: -webkit-linear-gradient(top, #3cb0fd, #3498db);
             background-image: -moz-linear-gradient(top, #3cb0fd, #3498db);
             background-image: -ms-linear-gradient(top, #3cb0fd, #3498db);
