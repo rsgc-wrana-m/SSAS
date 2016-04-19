@@ -303,23 +303,37 @@
         
         
           #container{
-            position:fixed;
+            
             height:100%;
             width:100%;
             min-width: 1280px;
+        }
+         #activebutton{
+              display:inline-block;
+             width:220px;
+            -webkit-border-radius: 8;
+            -moz-border-radius: 8;
+            border-radius: 8px;
+            color: #ffffff !important;
+            background:#151BCD ;
+            padding: 9px 20px 10px 20px;
+            text-decoration: none;
+            border-style: hidden;
         }
     </style>
     
     <body>
         <div id="container">
             <div id="left">
-            
+
             <h1>
                 <br><br><br>Paul Darvasi<br><br>
             </h1>
             
             <?php foreach($classNameList as $className){echo $className;}?>
-            
+            <h3 class="Link">
+                <a href="create_mission.php" id='activebutton'>Student List</a> <br><br>
+            </h3>
             <h3 class="Link">
                 <a href="create_mission.php" id='phpbutton'>Create Mission</a> <br><br>
             </h3>
