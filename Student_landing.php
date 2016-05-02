@@ -21,6 +21,7 @@
     $envelopes = $studentRow['envelopes'];
     $firstname = $studentRow['firstname'];
     $lastname = $studentRow['lastname'];
+    $StudentId = $studentRow['id'];
     
     
     
@@ -72,14 +73,36 @@
         $missionDescs = array();
         $missionRubrics = array();
         $missionIDs = array();
+        $missionChains = array();
         
         while ($row = mysqli_fetch_array($Missions)) {
         array_push($missionNames, $row["name"]);
         array_push($missionDescs, $row["description"]);
         array_push($missionRubrics, $row["rubric"]);
         array_push($missionIDs, $row["id"]);
-        
+        array_push($missionChains, $row["chainmission_id"]);
         }
+        
+        $missionChains = array_unique($missionChains);
+        $filteredChains = array();
+        foreach ($missionChains as $row) {
+            if ($row !== null)
+                $filteredChains[] = $row;
+            }
+        $missionChains = $filteredChains;
+        
+        $getCompletedMissions = "select * from completedmission where student_id=$StudentId";
+        $completedMissions  = mysqli_query($connection, $getCompletedMissions);
+        $completedMissionIDs = array();
+        while ($row = mysqli_fetch_array($completedMissions)) {
+        array_push($completedMissionIDs, $row["mission_id"]);
+        }
+        $getCompletedMissions = null;
+        $getCompletedMissions = array();
+        for($i = 0;i<count($completedMissionIDs);$i++){
+            $getCompletedMissions[$i] = "select * from mission where id=$completedMissionIDs[$i] and chainmission_id!=NULL";
+        }
+        
         
         
         $avaliableMissions = array();

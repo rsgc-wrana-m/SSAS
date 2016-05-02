@@ -191,12 +191,14 @@
         WHERE id=$studentID;";
         
         $removeMission = "delete from acceptedmission where student_id=$studentID";
+        $completeMission = "insert into completedmission(id,mission_id,student_id) values(0,$missionID,$studentID,)";
         
-        if ($connection->query($addValues) === TRUE && $connection->query($removeMission) === TRUE) {
+        if ($connection->query($addValues) === TRUE && $connection->query($removeMission) === TRUE && $connection->query($completeMission) === TRUE) {
             echo "Mission Accepted";
         }else {
             echo "Error: " . $addValues . "<br>" . $connection->error;
             echo "Error: " . $removeMission . "<br>" . $connection->error;
+            echo "Error: " . $completeMission . "<br>" . $connection->error;
         }
         
     }
