@@ -91,7 +91,7 @@ if(isset($_POST['submit'])){
                     <label class="inputDesc">Username:</label> <input type="text" name="uname" value="<?php echo $_POST['uname'] ?>"> <br> <br>
                     <label class="inputDesc">Password:</label> <input type="password" name="password" value=""> <br> <br> <br>
                     <input  class="button" type="submit" name="submit" id="phpbutton" value="Submit"> <br>
-                    <a href="forgot.php">Forgot your password? </a> <br>
+             <!--       <a href="forgot.php">Forgot your password? </a> <br> -->
                 </form>
             </div>
             <div id="rightSide">
